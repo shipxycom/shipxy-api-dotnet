@@ -14,7 +14,7 @@ class Program
                 { "mmsi", 477172700 }
             };
 
-        // string responseBody = await Shipxy.SearchShip(apiKey, "coco", 2);
+        string responseBody = await Shipxy.SearchShip(apiKey, "coco", 2);
         // string responseBody = await Shipxy.GetSingleShip(apiKey, 413961925);
         // string responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
         // string responseBody = await Shipxy.GetFleetShip(apiKey, "c02def78-a57d-4311-bee3-1c89a018cddf");
@@ -62,9 +62,36 @@ class Program
         // string responseBody = await Shipxy.DeleteFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
         // string responseBody = await Shipxy.AddFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700,412751690");
         // string responseBody = await Shipxy.UpdateFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700,412751690");
-        string responseBody = await Shipxy.DeleteFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700");
+        // string responseBody = await Shipxy.DeleteFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700");
 
+        Dictionary<string, object> parameters2 = new Dictionary<string, object>
+            {
+                { "ship_type", "59" },
+                { "length", "100" },
+                { "fleet_id", "f777007b-fb88-4c4c-b4eb-db33e84e99ee" },
+            };
 
+        // string responseBody = await Shipxy.AddArea(apiKey,
+        //     "119.846180,32.345143-119.814280,32.311867-119.4661,32.291067-119.375887,32.213847",
+        //     "浙江沿海区域1", "http://192.186.1.1:8000/Shipxy/testdemo", 3,  parameters2
+        // );
+
+        Dictionary<string, object> parameters3 = new Dictionary<string, object>
+            {
+                { "area_name", "area_name" },
+            };
+        // string responseBody = await Shipxy.UpdateArea(apiKey,
+        //     "75021d99-f552-4d93-b2d7-2b67ca9f0840",
+        //     parameters3
+        // );
+
+        // string responseBody = await Shipxy.GetArea(apiKey,
+        //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
+        // );
+
+        // string responseBody = await Shipxy.DeleteArea(apiKey,
+        //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
+        // );
 
         Console.WriteLine(responseBody);
     }
