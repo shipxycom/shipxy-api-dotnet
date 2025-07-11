@@ -50,8 +50,14 @@ class Program
 
         // string responseBody = await Shipxy.GetNavWarning(apiKey, "2024-07-21 20:00", "2024-09-21 20:00", 1);
 
-        string responseBody = await Shipxy.AddFleet(apiKey, "测试船队1", "477985700,412751691", 1);
-
+        // string responseBody = await Shipxy.AddFleet(apiKey, "测试船队1", "477985700,412751691", 1);
+        Dictionary<string, object> parameters1 = new Dictionary<string, object>
+            {
+                { "fleet_name", "fleet_name" },
+                { "mmsis", "477985700,412751691" },
+                { "monitor", 2 },
+            };
+        string responseBody = await Shipxy.UpdateFleet(apiKey, "c5832314-4aa4-4fd1-af30-8d32bf4829c0", parameters1);
 
         Console.WriteLine(responseBody);
     }

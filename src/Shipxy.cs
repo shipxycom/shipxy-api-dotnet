@@ -27,7 +27,7 @@ namespace ShipxyApi
             UriBuilder uriBuilder = new UriBuilder(apiUrl + "/" + methodName);
             uriBuilder.Query = queryString; // 自动编码查询字符串部分
             Uri uri = uriBuilder.Uri; // 获取编码后的URI对象
-            // Console.WriteLine(uri);
+            Console.WriteLine(uri);
             HttpResponseMessage response = await client.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
@@ -616,6 +616,27 @@ namespace ShipxyApi
                 { "monitor", monitor }
             };
             return await getMethod("AddFleet", parameters);
+        }
+
+        /// <summary>
+        /// 9监控推送-9.1监控船队管理-设置监控船舶列表-创建船队
+        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
+        /// <param name="parameters">
+        /// fleet_name 船队名称：非必填，输入名称则更新船队名称
+        /// mmsis 船舶清单：非必填，批量更新船队船舶信息，输入船舶mmsi编号，以英文逗号隔开。覆盖式全量更新，不做单独的增加和减少。
+        /// monitor 监控内容：非必填，变更船队进行监控的内容，1代表船队船舶查询；2代表船位实时推送；3代表船舶到离事件推送；4代表动态ETA推送；5代表AIS异常事件推送；6代表区域监控推送；7代表船舶搭靠事件推送。多选以英文逗号隔开。覆盖式全量更新，不做单独的增加和减少。
+        /// </param>
+        /// <returns></returns>
+        public static async Task<string> UpdateFleet(string key, string fleet_id, Dictionary<string, object> parameters)
+        {
+            if(parameters == null) return "Parameters cannot be null.";
+            parameters.Add("key", key);
+            parameters.Add("fleet_id", fleet_id);
+
+            return await getMethod("UpdateFleet", parameters);
         }
     }
 }
