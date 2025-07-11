@@ -23,7 +23,7 @@ namespace ShipxyApi
         /// <returns></returns>
         public static async Task<string> getMethod(string methodName, Dictionary<string, object> parameters)
         {
-            string queryString = string.Join("&", parameters.Select(p => $"{p.Key}={p.Value}"));
+            string queryString = string.Join("&", parameters.Where(p => p.Value != null).Select(p => $"{p.Key}={p.Value}"));
             UriBuilder uriBuilder = new UriBuilder(apiUrl + "/" + methodName);
             uriBuilder.Query = queryString; // 自动编码查询字符串部分
             Uri uri = uriBuilder.Uri; // 获取编码后的URI对象
@@ -84,6 +84,77 @@ namespace ShipxyApi
                 { "mmsis", mmsis }
             };
             return await getMethod("GetManyShip", parameters);
+        }
+
+        /// <summary>
+        /// 1船舶查询-1.2船舶位置查询-船队船位置查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/GxF2w6cZHisQiEkBRatcoIqlnfc
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_id">船队编号：必填，控制台中维护的船队id，查询船队下所有船舶数据。</param>
+        /// <returns></returns>
+        public static async Task<string> GetFleetShip(string key, string fleet_id)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_id", fleet_id }
+            };
+            return await getMethod("GetFleetShip", parameters);
+        }
+        /// <summary>
+        /// 1船舶查询-1.3周边船舶查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/XXTiwDpetivSFhkciWic6qarnOc
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="mmsi">船舶mmsi编号：必填，船舶mmsi编号，9 位数字</param>
+        /// <returns></returns>
+        public static async Task<string> GetSurRoundingShip(string key, int mmsi)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "mmsi", mmsi }
+            };
+            return await getMethod("GetSurRoundingShip", parameters);
+        }
+
+        /// <summary>
+        /// 1船舶查询-1.4区域船舶查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/ZlcrwKpgqik1L3kvbIMcBJUCn1U
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="region">查询区域：必填，经纬度逗号分隔，多个点减号分隔，如： （lng,lat - lng,lat ）经纬度数，多个经纬度坐标点必须按照顺时针或逆时针依次输入。</param>
+        /// <param name="output">输出格式：选填，输出数据格式类型选择：0为二进制 Base64 编码，1为json格式，默认为1</param>
+        /// <param name="scode">会话令牌：选填，当区域范围船舶单次请求无法全部返回时，可以根据首次请求返回的scode再次请求剩余的数据，保证全部返回。</param>
+        /// <returns></returns>
+        public static async Task<string> GetAreaShip(string key, string region, int output = 1, int? scode = null)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "region", region },
+                { "output", output },
+            };
+            if (scode != null) parameters.Add("scode", scode);
+            return await getMethod("GetAreaShip", parameters);
+        }
+
+        /// <summary>
+        /// 1船舶查询-1.5船舶船籍查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/Ko5gw1o0ZiMQankWEAscSMoin7g
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="mmsi">船舶mmsi编号：必填，船舶mmsi编号，9 位数字</param>
+        /// <returns></returns>
+        public static async Task<string> GetShipRegistry(string key, int mmsi)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "mmsi", mmsi }
+            };
+            return await getMethod("GetShipRegistry", parameters);
         }
     }
 }
