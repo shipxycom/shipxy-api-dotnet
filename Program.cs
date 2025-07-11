@@ -57,7 +57,12 @@ class Program
                 { "mmsis", "412751690" },
                 { "monitor", 1 },
             };
-        string responseBody = await Shipxy.UpdateFleet(apiKey, "c5832314-4aa4-4fd1-af30-8d32bf4829c0", parameters1);
+        // string responseBody = await Shipxy.UpdateFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2", parameters1);
+        // string responseBody = await Shipxy.GetFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
+        string responseBody = await Shipxy.DeleteFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
+        
+
+
 
         Console.WriteLine(responseBody);
     }
