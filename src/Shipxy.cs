@@ -655,7 +655,7 @@ namespace ShipxyApi
             };
             return await getMethod("GetFleet", parameters);
         }
-        
+
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-删除船队
         /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
@@ -671,6 +671,63 @@ namespace ShipxyApi
                 { "fleet_id", fleet_id },
             };
             return await getMethod("DeleteFleet", parameters);
+        }
+
+        /// <summary>
+        /// 9监控推送-9.1监控船队管理-设置监控船舶列表-船队船舶增加
+        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
+        /// <param name="mmsis">船舶清单：必填，添加船队管理的船舶，mmsi编号，以英文逗号隔开。增量更新，不变动原有船队船舶，输入的mmsi编号与原有重复时，新填入的不会增加到船队中。</param>
+        /// <returns></returns>
+        public static async Task<string> AddFleetShip(string key, string fleet_id, string mmsis)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_id", fleet_id },
+                { "mmsis", mmsis }
+            };
+            return await getMethod("AddFleetShip", parameters);
+        }
+
+        /// <summary>
+        /// 9监控推送-9.1监控船队管理-设置监控船舶列表-船队船舶批量更新
+        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
+        /// <param name="mmsis">船舶清单：必填，添加船队管理的船舶，mmsi编号，以英文逗号隔开。增量更新，不变动原有船队船舶，输入的mmsi编号与原有重复时，新填入的不会增加到船队中。</param>
+        /// <returns></returns>
+        public static async Task<string> UpdateFleetShip(string key, string fleet_id, string mmsis)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_id", fleet_id },
+                { "mmsis", mmsis }
+            };
+            return await getMethod("UpdateFleetShip", parameters);
+        }
+        
+        /// <summary>
+        /// 9监控推送-9.1监控船队管理-设置监控船舶列表-船队船舶删除
+        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
+        /// <param name="mmsis">船舶清单：必填，添加船队管理的船舶，mmsi编号，以英文逗号隔开。增量更新，不变动原有船队船舶，输入的mmsi编号与原有重复时，新填入的不会增加到船队中。</param>
+        /// <returns></returns>
+        public static async Task<string> DeleteFleetShip(string key, string fleet_id, string mmsis)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_id", fleet_id },
+                { "mmsis", mmsis }
+            };
+            return await getMethod("DeleteFleetShip", parameters);
         }
     }
 }

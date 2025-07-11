@@ -59,8 +59,10 @@ class Program
             };
         // string responseBody = await Shipxy.UpdateFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2", parameters1);
         // string responseBody = await Shipxy.GetFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
-        string responseBody = await Shipxy.DeleteFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
-        
+        // string responseBody = await Shipxy.DeleteFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
+        // string responseBody = await Shipxy.AddFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700,412751690");
+        // string responseBody = await Shipxy.UpdateFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700,412751690");
+        string responseBody = await Shipxy.DeleteFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700");
 
 
 
