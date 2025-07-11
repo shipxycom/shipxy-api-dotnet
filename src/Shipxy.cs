@@ -490,5 +490,22 @@ namespace ShipxyApi
             if (weather_time != null) parameters.Add("weather_time", weather_time);
             return await getMethod("GetWeatherByPoint", parameters);
         }
+
+        /// <summary>
+        /// 6气象天气-6.2海区气象
+        /// https://hiiau7lsqq.feishu.cn/wiki/EEdPwP4kqi10qjkehH5cmK2Onwc
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="weather_type">区域类型：必填，查询区域的类型：0：全部；1：沿岸；2：近海；3：远海。</param>
+        /// <returns></returns>
+        public static async Task<string> GetWeather(string key, int weather_type)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "weather_type", weather_type },
+            };
+            return await getMethod("GetWeather", parameters);
+        }
     }
 }
