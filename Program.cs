@@ -39,8 +39,9 @@ class Program
 
         // string responseBody = await Shipxy.PlanRouteByPoint(apiKey, "113.571144,22.844316", "121.58414,31.37979");
         // string responseBody = await Shipxy.PlanRouteByPort(apiKey, "CNGZG", "CNSHG");
-        string responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
+        // string responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
 
+        string responseBody = await Shipxy.GetWeatherByPoint(apiKey, 123.58414, 27.37979);
 
         Console.WriteLine(responseBody);
     }

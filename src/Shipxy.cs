@@ -458,7 +458,7 @@ namespace ShipxyApi
         /// <param name="port_code">港口标准code：非必填，港口标准CODE值，可以使用港口查询API获取。如果此处不填写港口，则默认查询船舶在AIS中填写的下一目的港口。</param>
         /// <param name="speed">设定船速：非必填，船舶在接下来的航行中维持的速度，单位：节。如果此处不填写，则默认按照船舶近一个月的平均航速来计算预计到达，平均航速是去掉在港口地区锚泊的船速信息后计算的平均值。</param>
         /// <returns></returns>
-        public static async Task<string> GetSingleETAPrecise(string key, int mmsi, string? port_code = null, float? speed = null)
+        public static async Task<string> GetSingleETAPrecise(string key, int mmsi, string? port_code = null, double? speed = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -470,5 +470,25 @@ namespace ShipxyApi
             return await getMethod("GetSingleETAPrecise", parameters);
         }
 
+        /// <summary>
+        /// 6气象天气-6.1单点海洋气象
+        /// https://hiiau7lsqq.feishu.cn/wiki/AFfAwtwc1ifij6k5JQ9c2u3hnbh
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="lng">经度：必填，WGS84坐标系，格式为lng=155.2134。</param>
+        /// <param name="lat">纬度：必填，WGS84坐标系，格式为lat=20.2134。</param>
+        /// <param name="weather_time">时间：非必填，utc时间，Unix时间戳。不填写则查询最近时间的气象数据。</param>
+        /// <returns></returns>
+        public static async Task<string> GetWeatherByPoint(string key, double lng, double lat, int? weather_time = null)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "lng", lng },
+                { "lat", lat },
+            };
+            if (weather_time != null) parameters.Add("weather_time", weather_time);
+            return await getMethod("GetWeatherByPoint", parameters);
+        }
     }
 }
