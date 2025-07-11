@@ -327,7 +327,7 @@ namespace ShipxyApi
             parameters.Add("time_zone", time_zone);
             return await getMethod("GetPortofCallByShip", parameters);
         }
-        
+
         /// <summary>
         /// 4挂靠记录-4.2船舶挂靠指定港口记录
         /// https://hiiau7lsqq.feishu.cn/wiki/R01xw8GxYiPd08kGhDeckVojnSC
@@ -351,9 +351,31 @@ namespace ShipxyApi
             parameters.Add("key", key);
             parameters.Add("port_code", port_code);
             parameters.Add("start_time", start_time);
-            parameters.Add("end_time", end_time);   
+            parameters.Add("end_time", end_time);
             parameters.Add("time_zone", time_zone);
             return await getMethod("GetPortofCallByShipPort", parameters);
+        }
+
+        /// <summary>
+        /// 4挂靠记录-4.3船舶当前挂靠信息
+        /// https://hiiau7lsqq.feishu.cn/wiki/O3PRwZoAjiX3DdknudicZnVpnxH
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="parameters">
+        /// 键值对：
+        /// mmsi: 船舶mmsi编号：非必填，船舶mmsi编号，9位数字。请求时船舶mmsi编号、imo、呼号、名称必填一项，全部不填则请求失败。
+        /// imo: imo编号：非必填，船舶imo编号
+        /// call_sign: 船舶呼号：非必填，船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
+        /// ship_name: 船舶名称：非必填，船舶英文名称，如果不同船舶的名称相同，则同名船舶的档案都将返回
+        /// </param>
+        /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
+        /// <returns></returns>
+        public static async Task<string> GetShipStatus(string key, Dictionary<string, object> parameters, int time_zone = 2)
+        {
+            if (parameters == null) return "Parameters cannot be null.";
+            parameters.Add("key", key);
+            parameters.Add("time_zone", time_zone);
+            return await getMethod("GetShipStatus", parameters);
         }
     }
 }
