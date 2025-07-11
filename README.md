@@ -7,7 +7,18 @@
 
 ## 示例用法
 ```
+using ShipxyApi;
 
+class Program
+{   
+    static string apiKey = "请从 API控制台 申请";
+
+    static async Task Main(string[] args)
+    {
+        string responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
+        Console.WriteLine(responseBody);
+    }
+}
 ```
 
 ## 开发者在使用过程中如有疑问，可以通过以下方式联系船讯网：
