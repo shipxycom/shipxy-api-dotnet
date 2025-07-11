@@ -54,8 +54,8 @@ class Program
         Dictionary<string, object> parameters1 = new Dictionary<string, object>
             {
                 { "fleet_name", "fleet_name" },
-                { "mmsis", "477985700,412751691" },
-                { "monitor", 2 },
+                { "mmsis", "412751690" },
+                { "monitor", 1 },
             };
         string responseBody = await Shipxy.UpdateFleet(apiKey, "c5832314-4aa4-4fd1-af30-8d32bf4829c0", parameters1);
 
