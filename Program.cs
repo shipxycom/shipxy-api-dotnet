@@ -34,7 +34,8 @@ class Program
 
         // string responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
         // string responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
-        string responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
+        // string responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
+        string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
 
 
         Console.WriteLine(responseBody);

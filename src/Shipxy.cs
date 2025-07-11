@@ -377,5 +377,30 @@ namespace ShipxyApi
             parameters.Add("time_zone", time_zone);
             return await getMethod("GetShipStatus", parameters);
         }
+
+        /// <summary>
+        /// 4挂靠记录-4.4港口挂靠历史船舶
+        /// https://hiiau7lsqq.feishu.cn/wiki/G9BDwzNPqiXdyckzFrBctxYUnHd
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
+        /// <param name="start_time">开始时间：必填，历史靠港记录开始时间，Unix 时间戳start_time与end_time为必填项，表示查询[start_time，end_time]之间的结果，最多1次只能查询1年（366天）的靠港记录.</param>
+        /// <param name="end_time">结束时间：必填，历史靠港记录结束时间，unix 时间戳。</param>
+        /// <param name="type">查询类型：选填，查询类型（选填）。1，按照ATA（到港时间）查询；2，按照ATD（离港时间）查询。默认值：1</param>
+        /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
+        /// <returns></returns>
+        public static async Task<string> GetPortofCallByPort(string key, string port_code, int start_time, int end_time, int type = 1, int time_zone = 2)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "port_code", port_code },
+                { "start_time", start_time },
+                { "end_time", end_time },
+                { "type", type },
+                { "time_zone", time_zone },
+            };
+            return await getMethod("GetPortofCallByPort", parameters);
+        }
     }
 }
