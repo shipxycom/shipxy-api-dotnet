@@ -42,7 +42,9 @@ class Program
         // string responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
 
         // string responseBody = await Shipxy.GetWeatherByPoint(apiKey, 123.58414, 27.37979);
-        string responseBody = await Shipxy.GetWeather(apiKey, 1);
+        // string responseBody = await Shipxy.GetWeather(apiKey, 1);
+        // string responseBody = await Shipxy.GetAllTyphoon(apiKey);
+        string responseBody = await Shipxy.GetSingleTyphoon(apiKey, 2477927);
 
 
 

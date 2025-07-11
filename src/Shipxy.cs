@@ -507,5 +507,37 @@ namespace ShipxyApi
             };
             return await getMethod("GetWeather", parameters);
         }
+
+        /// <summary>
+        /// 6气象天气-6.3全球台风-获取全球台风列表
+        /// https://hiiau7lsqq.feishu.cn/wiki/PuWSw4Nteir49WkMccMcryjNnbp
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <returns></returns>
+        public static async Task<string> GetAllTyphoon(string key)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+            };
+            return await getMethod("GetAllTyphoon", parameters);
+        }
+
+        /// <summary>
+        /// 6气象天气-6.3全球台风-获取单个台风信息
+        /// https://hiiau7lsqq.feishu.cn/wiki/PuWSw4Nteir49WkMccMcryjNnbp
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="typhoon_id">台风序号：必填，通过查询台风列表获得</param>
+        /// <returns></returns>
+        public static async Task<string> GetSingleTyphoon(string key, int typhoon_id)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "typhoon_id", typhoon_id }
+            };
+            return await getMethod("GetSingleTyphoon", parameters);
+        }
     }
 }
