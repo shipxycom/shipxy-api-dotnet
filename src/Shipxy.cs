@@ -539,5 +539,41 @@ namespace ShipxyApi
             };
             return await getMethod("GetSingleTyphoon", parameters);
         }
+
+        /// <summary>
+        /// 6气象天气-6.4国内港口潮汐-查询国内潮汐观测站列表
+        /// https://hiiau7lsqq.feishu.cn/wiki/Ayoiw98eSi0PrpkZnLnclCy8nzd
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <returns></returns>
+        public static async Task<string> GetTides(string key)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+            };
+            return await getMethod("GetTides", parameters);
+        }
+
+        /// <summary>
+        /// 6气象天气-6.4国内港口潮汐-查询单个观测站潮汐详情
+        /// https://hiiau7lsqq.feishu.cn/wiki/Ayoiw98eSi0PrpkZnLnclCy8nzd
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="port_code">潮汐观测站id：必填，港口潮汐观测站id</param>
+        /// <param name="start_date">起始日期：必填，查询潮汐起始日期（2022-09-26），支持从2020年开始往后的历史数据查询。</param>
+        /// <param name="end_date">结束日期：必填，查询潮汐结束日期（2022-10-03）</param>
+        /// <returns></returns>
+        public static async Task<string> GetTideData(string key, int port_code, string start_date, string end_date)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "port_code", port_code },
+                { "start_date", start_date },
+                { "end_date", end_date }
+            };
+            return await getMethod("GetTideData", parameters);
+        }
     }
 }

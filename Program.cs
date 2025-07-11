@@ -44,8 +44,9 @@ class Program
         // string responseBody = await Shipxy.GetWeatherByPoint(apiKey, 123.58414, 27.37979);
         // string responseBody = await Shipxy.GetWeather(apiKey, 1);
         // string responseBody = await Shipxy.GetAllTyphoon(apiKey);
-        string responseBody = await Shipxy.GetSingleTyphoon(apiKey, 2477927);
-
+        // string responseBody = await Shipxy.GetSingleTyphoon(apiKey, 2477927);
+        // string responseBody = await Shipxy.GetTides(apiKey);
+        string responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
 
 
         Console.WriteLine(responseBody);
