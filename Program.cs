@@ -35,7 +35,11 @@ class Program
         // string responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
         // string responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
         // string responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
-        string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
+        // string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
+
+        // string responseBody = await Shipxy.PlanRouteByPoint(apiKey, "113.571144,22.844316", "121.58414,31.37979");
+        // string responseBody = await Shipxy.PlanRouteByPort(apiKey, "CNGZG", "CNSHG");
+        string responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
 
 
         Console.WriteLine(responseBody);
