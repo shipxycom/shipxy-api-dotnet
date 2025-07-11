@@ -156,5 +156,105 @@ namespace ShipxyApi
             };
             return await getMethod("GetShipRegistry", parameters);
         }
+
+        /// <summary>
+        /// 1船舶查询-1.6船舶档案查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/Vvd2wHECliYz6okSoYucTRXvnsd
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="parameters">
+        /// 键值对：
+        /// mmsi: 船舶mmsi编号：非必填，船舶mmsi编号，9位数字。请求时船舶mmsi编号、imo、呼号、名称必填一项，全部不填则请求失败。
+        /// imo: imo编号：非必填，船舶imo编号
+        /// call_sign: 船舶呼号：非必填，船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
+        /// ship_name: 船舶名称：非必填，船舶英文名称，如果不同船舶的名称相同，则同名船舶的档案都将返回
+        /// </param>
+        /// <returns></returns>
+        public static async Task<string> SearchShipParticular(string key, Dictionary<string, object> parameters)
+        {
+            if (parameters == null) return "Parameters cannot be null.";
+            parameters.Add("key", key);
+            return await getMethod("SearchShipParticular", parameters);
+        }
+
+        /// <summary>
+        /// 2港口查询-2.1港口信息查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/DAlUwEn9Zi50gckSv0uc1qsIn6f
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="keywords">关键字：必填，港口查询的输入关键字，可以是港口中文/英文名称、港口标准五位码</param>
+        /// <param name="max">最大返回数量：选填，最多返回的结果数量，该值最大 100</param>
+        /// <returns></returns>
+        public static async Task<string> SearchPort(string key, string keywords, int max = 100)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "keywords", keywords },
+                { "max", max }
+            };
+            return await getMethod("SearchPort", parameters);
+        }
+
+        /// <summary>
+        /// 2港口查询-2.2港口当前靠泊船查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/KdBNwIxOhijpALkCkNXc69MKn3g
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
+        /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
+        /// <returns></returns>
+        public static async Task<string> GetBerthShips(string key, string port_code, int? ship_type = null)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "port_code", port_code },
+            };
+            if (ship_type != null) parameters.Add("ship_type", ship_type);
+            return await getMethod("GetBerthShips", parameters);
+        }
+
+        /// <summary>
+        /// 2港口查询-2.3港口当前到锚船舶查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/WTHnwa66niA4VhkmNVXchRRSnYe
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
+        /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
+        /// <returns></returns>
+        public static async Task<string> GetAnchorShips(string key, string port_code, int? ship_type = null)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "port_code", port_code },
+            };
+            if (ship_type != null) parameters.Add("ship_type", ship_type);
+            return await getMethod("GetAnchorShips", parameters);
+        }
+
+        /// <summary>
+        /// 2港口查询-2.4港口预抵船舶查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/Poe3wdXkwiwzMUkATcJcigeBnJh
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
+        /// <param name="start_time">开始时间：必填，开始时间，utc时间戳。开始时间必须大于当前时间</param>
+        /// <param name="end_time">结束时间：必填，结束时间，utc时间戳。单次请求查询中，开始时间和结束时间的间隔不超过1周。</param>
+        /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
+        /// <returns></returns>
+        public static async Task<string> GetETAShips(string key, string port_code, int start_time, int end_time, int? ship_type = null)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "port_code", port_code },
+                { "start_time", start_time },
+                { "end_time", end_time },
+            };
+            if (ship_type != null) parameters.Add("ship_type", ship_type);
+            return await getMethod("GetETAShips", parameters);
+        }
     }
 }
