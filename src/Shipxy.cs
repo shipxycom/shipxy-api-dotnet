@@ -575,5 +575,26 @@ namespace ShipxyApi
             };
             return await getMethod("GetTideData", parameters);
         }
+
+        /// <summary>
+        /// 8海事数据-8.1航行警告查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/DCgdwVip5ifCpAkQ3lfcq8OEnOc
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="start_time">开始时间：必填，筛选航行警告发布时间。</param>
+        /// <param name="end_time">结束时间：必填，筛选航行警告发布时间</param>
+        /// <param name="warning_type">警告类型：非必填，警告类型筛选，默认是0，返回全部类型。1军事任务，2船舶演习，3实弹射击，4船舶作业，5航标动态，6船舶搁浅，7船舶试航，8沉没，9人员伤亡，10施工作业，11撤销航警，12其他</param>
+        /// <returns></returns>
+        public static async Task<string> GetNavWarning(string key, string start_time, string end_time, int warning_type = 0)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "start_time", start_time },
+                { "end_time", end_time },
+                { "warning_type", warning_type }
+            };
+            return await getMethod("GetNavWarning", parameters);
+        }
     }
 }

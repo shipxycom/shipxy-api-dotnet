@@ -46,7 +46,9 @@ class Program
         // string responseBody = await Shipxy.GetAllTyphoon(apiKey);
         // string responseBody = await Shipxy.GetSingleTyphoon(apiKey, 2477927);
         // string responseBody = await Shipxy.GetTides(apiKey);
-        string responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
+        // string responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
+
+        string responseBody = await Shipxy.GetNavWarning(apiKey, "2024-07-21 20:00", "2024-09-21 20:00", 1);
 
 
         Console.WriteLine(responseBody);
