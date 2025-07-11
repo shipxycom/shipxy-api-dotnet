@@ -632,11 +632,21 @@ namespace ShipxyApi
         /// <returns></returns>
         public static async Task<string> UpdateFleet(string key, string fleet_id, Dictionary<string, object> parameters)
         {
-            if(parameters == null) return "Parameters cannot be null.";
+            if (parameters == null) return "Parameters cannot be null.";
             parameters.Add("key", key);
             parameters.Add("fleet_id", fleet_id);
 
             return await getMethod("UpdateFleet", parameters);
+        }
+        
+        public static async Task<string> GetFleet(string key, string fleet_id)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_id", fleet_id },
+            };
+            return await getMethod("GetFleet", parameters);
         }
     }
 }
