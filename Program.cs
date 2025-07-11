@@ -28,8 +28,14 @@ class Program
         // string responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
 
         // string responseBody = await Shipxy.GetShipTrack(apiKey, 477172700, 1746612218, 1747044218);
-        string responseBody = await Shipxy.SearchshipApproach(apiKey, 477172700, 1746612218, 1747044218);
+        // string responseBody = await Shipxy.SearchshipApproach(apiKey, 477172700, 1746612218, 1747044218);
 
+        Dictionary<string, object> parameters = new Dictionary<string, object>
+        {
+            { "mmsi", 477172700 }
+        };
+        // string responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
+        string responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
 
 
         Console.WriteLine(responseBody);
