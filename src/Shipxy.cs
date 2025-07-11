@@ -256,5 +256,51 @@ namespace ShipxyApi
             if (ship_type != null) parameters.Add("ship_type", ship_type);
             return await getMethod("GetETAShips", parameters);
         }
+
+        /// <summary>
+        /// 3历史行为-3.1船舶历史轨迹查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/RK2Uwh7tziQ7SnkzlDgcUk8Nnkc
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="mmsi">船舶编号：必填，船舶mmsi编号</param>
+        /// <param name="start_time">开始时间：必填，查询的开始时间，unix时间戳</param>
+        /// <param name="end_time">结束时间：必填，查询的截止时间，unix时间戳</param>
+        /// <param name="output">输出格式：选填，输出数据格式类型选择：0为二进制 Base64 编码，1为json格式，默认为1。</param>
+        /// <returns></returns>
+        public static async Task<string> GetShipTrack(string key, int mmsi, int start_time, int end_time, int output = 1)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "mmsi", mmsi },
+                { "start_time", start_time },
+                { "end_time", end_time },
+                { "output", output },
+            };
+            return await getMethod("GetShipTrack", parameters);
+        }
+
+        /// <summary>
+        /// 3历史行为-3.2船舶搭靠记录查询
+        /// https://hiiau7lsqq.feishu.cn/wiki/GYrTwxfzRiQdDxkJYOWcF3kKnnf
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="mmsi">船舶编号：必填，船舶mmsi编号，9 位数字</param>
+        /// <param name="start_time">开始时间：必填，开始时间，utc时间戳。</param>
+        /// <param name="end_time">结束时间：必填，结束时间，utc时间戳。单次请求查询中，开始时间和结束时间的间隔不超过1个月。</param>
+        /// <param name="approach_zone">搭靠地区：选填，1代表港口地区搭靠；2代表锚地搭靠；3代表其他地点搭靠；不填写返回全部。</param>
+        /// <returns></returns>
+        public static async Task<string> SearchshipApproach(string key, int mmsi, int start_time, int end_time, int? approach_zone = null)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "mmsi", mmsi },
+                { "start_time", start_time },
+                { "end_time", end_time },
+            };
+            if (approach_zone != null) parameters.Add("approach_zone", approach_zone);
+            return await getMethod("SearchshipApproach", parameters);
+        }
     }
 }

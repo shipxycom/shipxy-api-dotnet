@@ -25,7 +25,13 @@ class Program
         // string responseBody = await Shipxy.SearchPort(apiKey, "qingdao", 2);
         // string responseBody = await Shipxy.GetBerthShips(apiKey, "CNSHG", 90);
         // string responseBody = await Shipxy.GetAnchorShips(apiKey, "CNSHG", 90);
-        string responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
+        // string responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
+
+        // string responseBody = await Shipxy.GetShipTrack(apiKey, 477172700, 1746612218, 1747044218);
+        string responseBody = await Shipxy.SearchshipApproach(apiKey, 477172700, 1746612218, 1747044218);
+
+
+
         Console.WriteLine(responseBody);
     }
 }
