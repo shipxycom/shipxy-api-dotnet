@@ -639,6 +639,13 @@ namespace ShipxyApi
             return await getMethod("UpdateFleet", parameters);
         }
         
+        /// <summary>
+        /// 9监控推送-9.1监控船队管理-设置监控船舶列表-查询船队
+        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
+        /// <returns></returns>
         public static async Task<string> GetFleet(string key, string fleet_id)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
