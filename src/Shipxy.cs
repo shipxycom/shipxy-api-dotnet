@@ -596,5 +596,26 @@ namespace ShipxyApi
             };
             return await getMethod("GetNavWarning", parameters);
         }
+
+        /// <summary>
+        /// 9监控推送-9.1监控船队管理-设置监控船舶列表-创建船队
+        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// </summary>
+        /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
+        /// <param name="fleet_name">船队名称：必填，为您创建的船队起名，用来后续查询和区分</param>
+        /// <param name="mmsis">船舶清单：必填，添加船队下管理的船舶信息，输入多个mmsi编号，用英文逗号隔开</param>
+        /// <param name="monitor">监控内容：必填，选择船队进行监控的内容，1代表船队船舶查询；2代表船位实时推送；3代表船舶到离事件推送；4代表动态ETA推送；5代表AIS异常事件推送；6代表区域监控推送；7代表船舶搭靠事件推送。多选以英文逗号隔开。</param>
+        /// <returns></returns>
+        public static async Task<string> AddFleet(string key, string fleet_name, string mmsis, int monitor = 0)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_name", fleet_name },
+                { "mmsis", mmsis },
+                { "monitor", monitor }
+            };
+            return await getMethod("AddFleet", parameters);
+        }
     }
 }
