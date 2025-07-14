@@ -11,7 +11,7 @@
 ```
 dotnet add package shipxy-api
 ```
-引入方式一：
+引入方式二：
 
 1、项目中添加动态库，例如路径为 lib\shipxy-api-dotnet.dll。   
 2、.csproj文件中根节点Project引用该动态库。
