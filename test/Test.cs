@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using ShipxyApi;
+﻿using ShipxyApi;
 
 class Program
 {   

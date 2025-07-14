@@ -1,8 +1,3 @@
-using System.Net;
-using System.Net.Http;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-
 /// White
 /// 249898979@qq.com
 namespace ShipxyApi
