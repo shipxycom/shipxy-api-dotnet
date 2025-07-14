@@ -1,9 +1,13 @@
-﻿using ShipxyApi;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using ShipxyApi;
 
 class Program
 {   
-    // static string apiKey = Key.apiKey;
-    static string apiKey = "请从 API控制台 申请";
+    static string apiKey = Key.apiKey;
+    // static string apiKey = "请从 API控制台 申请";
 
     static async Task Main(string[] args)
     {

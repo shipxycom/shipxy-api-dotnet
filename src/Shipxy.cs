@@ -1,3 +1,10 @@
+using System;
+using System.Net;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Linq;
+
 /// White
 /// 249898979@qq.com
 namespace ShipxyApi
