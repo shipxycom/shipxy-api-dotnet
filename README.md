@@ -4,8 +4,15 @@
 [在线开发文档](https://hiiau7lsqq.feishu.cn/wiki/E0wAwrPpvieGhSk5wLCctNqonVb)&nbsp;&nbsp;
 [github](https://github.com/shipxycom/shipxy-api-dotnet)&nbsp;&nbsp;
 [gitee](https://gitee.com/shipxycom/shipxy-api-dotnet)&nbsp;&nbsp;
+[nuget](https://www.nuget.org/packages/shipxy-api/)&nbsp;&nbsp;
 
-## 示例用法
+
+引入方式一：
+```
+dotnet add package shipxy-api
+```
+引入方式一：
+
 1、项目中添加动态库，例如路径为 lib\shipxy-api-dotnet.dll。   
 2、.csproj文件中根节点Project引用该动态库。
 ```
@@ -15,7 +22,7 @@
       </Reference>
   </ItemGroup>
 ```
-3、代码中使用
+## 示例用法
 ```
 using System;
 using System.Threading.Tasks;
