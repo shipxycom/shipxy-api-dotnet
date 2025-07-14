@@ -7,7 +7,7 @@
 
 ## 示例用法
 1、项目中添加动态库，例如路径为 lib\shipxy-api-dotnet.dll。   
-2、.csproj文件中引用该动态库。
+2、.csproj文件中根节点Project引用该动态库。
 ```
   <ItemGroup>
       <Reference Include="ShipxyApi">
@@ -17,11 +17,19 @@
 ```
 3、代码中使用
 ```
+using System;
+using System.Threading.Tasks;
 using ShipxyApi;
 
-string apiKey = "请从 API控制台 申请";
-string responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
-Console.WriteLine(responseBody);
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        string apiKey = "请从 API控制台 申请";
+        string responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
+        Console.WriteLine(responseBody);
+    }
+}
 ```
 
 ## 开发者在使用过程中如有疑问，可以通过以下方式联系船讯网：
