@@ -230,7 +230,7 @@ namespace ShipxyApi
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
             parameters.Add("key", key);
-            string json =  await getMethod("SearchShipParticular", parameters);
+            string json = await getMethod("SearchShipParticular", parameters);
 
             SearchShipParticularResponse response = JsonSerializer.Deserialize<SearchShipParticularResponse>(json)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
@@ -245,7 +245,7 @@ namespace ShipxyApi
         /// <param name="keywords">关键字：必填，港口查询的输入关键字，可以是港口中文/英文名称、港口标准五位码</param>
         /// <param name="max">最大返回数量：选填，最多返回的结果数量，该值最大 100</param>
         /// <returns></returns>
-        public static async Task<string> SearchPort(string key, string keywords, int max = 100)
+        public static async Task<SearchPortResponse> SearchPort(string key, string keywords, int max = 100)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -253,7 +253,10 @@ namespace ShipxyApi
                 { "keywords", keywords },
                 { "max", max }
             };
-            return await getMethod("SearchPort", parameters);
+            string json = await getMethod("SearchPort", parameters);
+            SearchPortResponse response = JsonSerializer.Deserialize<SearchPortResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -264,7 +267,7 @@ namespace ShipxyApi
         /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
         /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
         /// <returns></returns>
-        public static async Task<string> GetBerthShips(string key, string port_code, int? ship_type = null)
+        public static async Task<GetBerthShipsResponse> GetBerthShips(string key, string port_code, int? ship_type = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -272,7 +275,10 @@ namespace ShipxyApi
                 { "port_code", port_code },
             };
             if (ship_type != null) parameters.Add("ship_type", ship_type);
-            return await getMethod("GetBerthShips", parameters);
+            string json = await getMethod("GetBerthShips", parameters);
+            GetBerthShipsResponse response = JsonSerializer.Deserialize<GetBerthShipsResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>

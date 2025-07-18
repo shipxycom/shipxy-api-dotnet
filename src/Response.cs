@@ -717,4 +717,197 @@ public class SearchShipParticularResponse
     public List<ShipParticularData>? Data { get; set; }
 }
 
+/// <summary>
+/// 港口数据模型
+/// </summary>
+public class PortData
+{
+    /// <summary>
+    /// 港口标准五位码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
 
+    /// <summary>
+    /// 港口英文名称
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 港口中文名称
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnName { get; set; }
+
+    /// <summary>
+    /// 港口所在时区
+    /// </summary>
+    [JsonPropertyName("port_time_zone")]
+    public string? PortTimeZone { get; set; }
+
+    /// <summary>
+    /// 港口所属国家英文名
+    /// </summary>
+    [JsonPropertyName("port_country_name")]
+    public string? PortCountryName { get; set; }
+
+    /// <summary>
+    /// 港口所属国家中文名
+    /// </summary>
+    [JsonPropertyName("port_country_cnname")]
+    public string? PortCountryCnName { get; set; }
+}
+
+
+/// <summary>
+/// 港口数据模型
+/// </summary>
+public class SearchPortResponse
+{
+    /// <summary>
+    /// 状态
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 结果
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<PortData>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 船舶泊位数据实体类
+/// </summary>
+public class BerthShipData
+{
+    /// <summary>
+    /// 船舶mmsi编号，9 位数字
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public long? Mmsi { get; set; }
+
+    /// <summary>
+    /// imo编号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public long? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public int? ShipType { get; set; }
+
+    /// <summary>
+    /// 船舶长度，米，取值范围(0-1022)
+    /// </summary>
+    [JsonPropertyName("length")]
+    public float? Length { get; set; }
+
+    /// <summary>
+    /// 船舶宽度，米
+    /// </summary>
+    [JsonPropertyName("width")]
+    public float? Width { get; set; }
+
+    /// <summary>
+    /// 左舷距，米
+    /// </summary>
+    [JsonPropertyName("left")]
+    public float? Left { get; set; }
+
+    /// <summary>
+    /// 尾距，米
+    /// </summary>
+    [JsonPropertyName("trail")]
+    public float? Trail { get; set; }
+
+    /// <summary>
+    /// 吃水深度，米
+    /// </summary>
+    [JsonPropertyName("draught")]
+    public float? Draught { get; set; }
+
+    /// <summary>
+    /// 到达时间，北京时间，格式如：2025-03-03 10:51:40
+    /// </summary>
+    [JsonPropertyName("arrival_time")]
+    public string? ArrivalTime { get; set; }
+
+    /// <summary>
+    /// 到达时间，Unix时间戳，UTC时间
+    /// </summary>
+    [JsonPropertyName("arrival_time_utc")]
+    public string? ArrivalTimeUtc { get; set; }
+
+    /// <summary>
+    /// 船舶当前在港口持续停留的时间，单位分钟
+    /// </summary>
+    [JsonPropertyName("stay_time")]
+    public float? StayTime { get; set; }
+
+    /// <summary>
+    /// 航行状态
+    /// 0表示状态正常，-1代表无效数据
+    /// </summary>
+    [JsonPropertyName("navistat")]
+    public int? Navistat { get; set; }
+}
+
+/// <summary>
+/// 获取泊位船舶响应结果实体类
+/// </summary>
+public class GetBerthShipsResponse
+{
+    /// <summary>
+    /// 状态
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 结果信息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<BerthShipData>? Data { get; set; }
+}

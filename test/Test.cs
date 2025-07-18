@@ -36,8 +36,10 @@ class Program
         // Console.WriteLine(responseBody?.Data?[0]?.MainEngineList?[0].Designer);
 
 
-        string responseBody = await Shipxy.SearchPort(apiKey, "qingdao", 2);
-        // string responseBody = await Shipxy.GetBerthShips(apiKey, "CNSHG", 90);
+        // SearchPortResponse responseBody = await Shipxy.SearchPort(apiKey, "qingdao", 2);
+        // Console.WriteLine(responseBody?.Data?[0].PortCnName);
+        GetBerthShipsResponse responseBody = await Shipxy.GetBerthShips(apiKey, "CNSHG", 90);
+        Console.WriteLine(responseBody?.Data?[0].ShipName);
         // string responseBody = await Shipxy.GetAnchorShips(apiKey, "CNSHG", 90);
         // string responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
 
