@@ -487,7 +487,7 @@ namespace ShipxyApi
         /// <param name="type">查询类型：选填，查询类型（选填）。1，按照ATA（到港时间）查询；2，按照ATD（离港时间）查询。默认值：1</param>
         /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
         /// <returns></returns>
-        public static async Task<string> GetPortofCallByPort(string key, string port_code, int start_time, int end_time, int type = 1, int time_zone = 2)
+        public static async Task<GetPortOfCallByPortResponse> GetPortofCallByPort(string key, string port_code, int start_time, int end_time, int type = 1, int time_zone = 2)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -498,7 +498,12 @@ namespace ShipxyApi
                 { "type", type },
                 { "time_zone", time_zone },
             };
-            return await getMethod("GetPortofCallByPort", parameters);
+
+            string json = await getMethod("GetPortofCallByPort", parameters);
+
+            GetPortOfCallByPortResponse response = JsonSerializer.Deserialize<GetPortOfCallByPortResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -511,7 +516,7 @@ namespace ShipxyApi
         /// <param name="avoid">绕航节点：非必填，需要避让的节点，id详见附录7 。绕航多节点时，不同id之间使用逗号分隔；不填则不绕航；一次请求绕航的节点控制在10个以内。</param>
         /// <param name="through">查询类型：非必填，必经的点，lng,lat - lng,lat；多点之间用“-”连接；不填则不必经；一次请求途经的节点控制在30个以内。</param>
         /// <returns></returns>
-        public static async Task<string> PlanRouteByPoint(string key, string start_point, string end_point, string? avoid = null, string? through = null)
+        public static async Task<PlanRouteByPointResponse> PlanRouteByPoint(string key, string start_point, string end_point, string? avoid = null, string? through = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -521,7 +526,12 @@ namespace ShipxyApi
             };
             if (avoid != null) parameters.Add("avoid", avoid);
             if (through != null) parameters.Add("through", through);
-            return await getMethod("PlanRouteByPoint", parameters);
+
+            string json = await getMethod("PlanRouteByPoint", parameters);
+
+            PlanRouteByPointResponse response = JsonSerializer.Deserialize<PlanRouteByPointResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -534,7 +544,7 @@ namespace ShipxyApi
         /// <param name="avoid">绕航节点：非必填，需要避让的节点，id详见附录7 。绕航多节点时，不同id之间使用逗号分隔；不填则不绕航；一次请求绕航的节点控制在10个以内。</param>
         /// <param name="through">查询类型：非必填，必经的点，lng,lat - lng,lat；多点之间用“-”连接；不填则不必经；一次请求途经的节点控制在30个以内。</param>
         /// <returns></returns>
-        public static async Task<string> PlanRouteByPort(string key, string start_port_code, string end_port_code, string? avoid = null, string? through = null)
+        public static async Task<PlanRouteByPortResponse> PlanRouteByPort(string key, string start_port_code, string end_port_code, string? avoid = null, string? through = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -544,7 +554,12 @@ namespace ShipxyApi
             };
             if (avoid != null) parameters.Add("avoid", avoid);
             if (through != null) parameters.Add("through", through);
-            return await getMethod("PlanRouteByPort", parameters);
+
+            string json = await getMethod("PlanRouteByPort", parameters);
+
+            PlanRouteByPortResponse response = JsonSerializer.Deserialize<PlanRouteByPortResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>

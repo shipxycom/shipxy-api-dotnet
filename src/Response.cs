@@ -1949,3 +1949,287 @@ public class GetShipStatusResponse
     [JsonPropertyName("data")]
     public List<ShipStatusData>? Data { get; set; }
 }
+
+
+/// <summary>
+/// 港口停靠详细信息实体类
+/// </summary>
+public class PortCallPortInfo
+{
+    /// <summary>
+    /// 港口代码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
+
+    /// <summary>
+    /// 港口中文名
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnName { get; set; }
+
+    /// <summary>
+    /// 港口名
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 港口时区
+    /// </summary>
+    [JsonPropertyName("port_time_zone")]
+    public string? PortTimeZone { get; set; }
+
+    /// <summary>
+    /// 码头名称
+    /// </summary>
+    [JsonPropertyName("terminal_name")]
+    public string? TerminalName { get; set; }
+
+    /// <summary>
+    /// 泊位名称
+    /// </summary>
+    [JsonPropertyName("berth_name")]
+    public string? BerthName { get; set; }
+
+    /// <summary>
+    /// 到达锚地
+    /// </summary>
+    [JsonPropertyName("arrival_anchorage")]
+    public string? ArrivalAnchorage { get; set; }
+
+    /// <summary>
+    /// 实际到港时间 (ATA)
+    /// </summary>
+    [JsonPropertyName("ata")]
+    public string? Ata { get; set; }
+
+    /// <summary>
+    /// 实际靠泊时间 (ATB)
+    /// </summary>
+    [JsonPropertyName("atb")]
+    public string? Atb { get; set; }
+
+    /// <summary>
+    /// 实际离港时间 (ATD)
+    /// </summary>
+    [JsonPropertyName("atd")]
+    public string? Atd { get; set; }
+
+    /// <summary>
+    /// 到港吃水
+    /// </summary>
+    [JsonPropertyName("arrival_draught")]
+    public double? ArrivalDraught { get; set; }
+
+    /// <summary>
+    /// 离港吃水
+    /// </summary>
+    [JsonPropertyName("departure_draught")]
+    public double? DepartureDraught { get; set; }
+
+    /// <summary>
+    /// 停留时间
+    /// </summary>
+    [JsonPropertyName("stay_time")]
+    public double? StayTime { get; set; }
+
+    /// <summary>
+    /// 停靠码头时间
+    /// </summary>
+    [JsonPropertyName("stay_terminal_time")]
+    public double? StayTerminalTime { get; set; }
+}
+
+
+/// <summary>
+/// 港口停靠数据实体类
+/// </summary>
+public class PortOfCallByPortData
+{
+    /// <summary>
+    /// IMO号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public int? Imo { get; set; }
+
+    /// <summary>
+    /// MMSI号
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public int? Mmsi { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public string? ShipType { get; set; }
+
+    /// <summary>
+    /// 船名
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 当前港口信息
+    /// </summary>
+    [JsonPropertyName("currentport")]
+    public PortCallPortInfo? CurrentPort { get; set; }
+
+    /// <summary>
+    /// 前一个港口信息
+    /// </summary>
+    [JsonPropertyName("previousport")]
+    public PortCallPortInfo? PreviousPort { get; set; }
+
+    /// <summary>
+    /// 下一个港口信息
+    /// </summary>
+    [JsonPropertyName("nextport")]
+    public PortCallPortInfo? NextPort { get; set; }
+}
+
+
+/// <summary>
+/// 获取港口停靠数据响应实体类
+/// </summary>
+public class GetPortOfCallByPortResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 港口停靠数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<PortOfCallByPortData>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 路径点实体类，表示经纬度坐标
+/// </summary>
+public class RoutePoint
+{
+    /// <summary>
+    /// 经度
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public double? Lng { get; set; }
+
+    /// <summary>
+    /// 纬度
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public double? Lat { get; set; }
+}
+
+
+/// <summary>
+/// 基于点的航线规划数据实体类
+/// </summary>
+public class PlanRouteByPointData
+{
+    /// <summary>
+    /// 距离
+    /// </summary>
+    [JsonPropertyName("distance")]
+    public double? Distance { get; set; }
+
+    /// <summary>
+    /// 航线点列表
+    /// </summary>
+    [JsonPropertyName("route")]
+    public List<RoutePoint>? Route { get; set; }
+}
+
+
+/// <summary>
+/// 基于点的航线规划响应实体类
+/// </summary>
+public class PlanRouteByPointResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public PlanRouteByPointData? Data { get; set; }
+}
+
+
+/// <summary>
+/// 基于点的航线规划数据实体类
+/// </summary>
+public class PlanRouteByPortData
+{
+    /// <summary>
+    /// 距离
+    /// </summary>
+    [JsonPropertyName("distance")]
+    public double? Distance { get; set; }
+
+    /// <summary>
+    /// 航线点列表
+    /// </summary>
+    [JsonPropertyName("route")]
+    public List<RoutePoint>? Route { get; set; }
+}
+
+
+/// <summary>
+/// 基于点的航线规划响应实体类
+/// </summary>
+public class PlanRouteByPortResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public PlanRouteByPortData? Data { get; set; }
+}

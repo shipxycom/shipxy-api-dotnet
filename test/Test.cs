@@ -56,12 +56,15 @@ class Program
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
         // GetPortOfCallByShipPortResponse responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
-        GetShipStatusResponse responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
-        Console.WriteLine(responseBody?.Data?[0].ShipName);
-        // string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
+        // GetShipStatusResponse responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // GetPortOfCallByPortResponse responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
 
-        // string responseBody = await Shipxy.PlanRouteByPoint(apiKey, "113.571144,22.844316", "121.58414,31.37979");
-        // string responseBody = await Shipxy.PlanRouteByPort(apiKey, "CNGZG", "CNSHG");
+        // PlanRouteByPointResponse responseBody = await Shipxy.PlanRouteByPoint(apiKey, "113.571144,22.844316", "121.58414,31.37979");
+        // Console.WriteLine(responseBody?.Data?.Route?[0].Lng);
+        PlanRouteByPortResponse responseBody = await Shipxy.PlanRouteByPort(apiKey, "CNGZG", "CNSHG");
+        Console.WriteLine(responseBody?.Data?.Route?[0].Lng);
         // string responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
 
         // string responseBody = await Shipxy.GetWeatherByPoint(apiKey, 123.58414, 27.37979);
@@ -116,6 +119,6 @@ class Program
         //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
         // );
 
-        Console.WriteLine(JsonSerializer.Serialize(responseBody));
+        // Console.WriteLine(JsonSerializer.Serialize(responseBody));
     }
 }
