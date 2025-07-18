@@ -109,37 +109,40 @@ class Program
         // Console.WriteLine(responseBody?.Data?.Mmsis);
 
 
-        AreaRequest areaRequest = new AreaRequest
-        {
-            AreaBounds = "119.846180,32.345143-119.814280,32.311867-119.4661,32.291067-119.375887,32.213847",
-            AreaName = "浙江沿海区域1",
-            Url = "http://192.186.1.1:8000/Shipxy/testdemo",
-            FilterType = 3,
-            ShipType = "59",
-            Length = "100",
-            FleetId = "0372ec4c-eead-49ce-b005-6ffa731cc1df"
-        };
-
+        // AreaRequest areaRequest = new AreaRequest
+        // {
+        //     AreaBounds = "119.846180,32.345143-119.814280,32.311867-119.4661,32.291067-119.375887,32.213847",
+        //     AreaName = "浙江沿海区域1",
+        //     Url = "http://192.186.1.1:8000/Shipxy/testdemo",
+        //     FilterType = 3,
+        //     ShipType = "59",
+        //     Length = "100",
+        //     FleetId = "0372ec4c-eead-49ce-b005-6ffa731cc1df"
+        // };
         // AreaResponse responseBody = await Shipxy.AddArea(apiKey, areaRequest);
         // Console.WriteLine(responseBody?.Data?.AreaId);
 
-        Dictionary<string, object> parameters3 = new Dictionary<string, object>
-            {
-                { "area_name", "area_name" },
-            };
-        // string responseBody = await Shipxy.UpdateArea(apiKey,
-        //     "75021d99-f552-4d93-b2d7-2b67ca9f0840",
-        //     parameters3
+        // AreaRequest areaRequest1 = new AreaRequest
+        // {
+        //     AreaName = "浙江沿海区域2",
+        // };;
+        // AreaResponse responseBody = await Shipxy.UpdateArea(
+        //     apiKey,
+        //     "075451e6-0ffa-44d4-94d2-adbf17d862a5",
+        //     areaRequest1
         // );
+        // Console.WriteLine(responseBody?.Data?.AreaId);
 
-        // string responseBody = await Shipxy.GetArea(apiKey,
-        //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
+        // AreaResponse responseBody = await Shipxy.GetArea(apiKey,
+        //      "075451e6-0ffa-44d4-94d2-adbf17d862a5"
         // );
+        // Console.WriteLine(responseBody?.Data?.AreaId);
 
-        // string responseBody = await Shipxy.DeleteArea(apiKey,
-        //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
+        // BaseResponse responseBody = await Shipxy.DeleteArea(apiKey,
+        //     "b7a40fa4-daae-4586-a56a-b09457331628"
         // );
+        // Console.WriteLine(responseBody?.Status);
 
-        Console.WriteLine(JsonSerializer.Serialize(responseBody));
+        // Console.WriteLine(JsonSerializer.Serialize(responseBody));
     }
 }
