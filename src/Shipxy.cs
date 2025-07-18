@@ -752,7 +752,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-创建船队
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleetRequest">船队请求：必填，包含船队名称、船舶清单和监控内容的请求对象</param>
@@ -776,7 +776,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-创建船队
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
@@ -805,7 +805,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-查询船队
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
@@ -827,7 +827,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-删除船队
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
@@ -849,13 +849,13 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-船队船舶增加
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
         /// <param name="mmsis">船舶清单：必填，添加船队管理的船舶，mmsi编号，以英文逗号隔开。增量更新，不变动原有船队船舶，输入的mmsi编号与原有重复时，新填入的不会增加到船队中。</param>
         /// <returns></returns>
-        public static async Task<string> AddFleetShip(string key, string fleet_id, string mmsis)
+        public static async Task<FleetResponse> AddFleetShip(string key, string fleet_id, string mmsis)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -863,18 +863,23 @@ namespace ShipxyApi
                 { "fleet_id", fleet_id },
                 { "mmsis", mmsis }
             };
-            return await getMethod("AddFleetShip", parameters);
+
+            string json = await postMethod("AddFleetShip", parameters);
+
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-船队船舶批量更新
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
         /// <param name="mmsis">船舶清单：必填，添加船队管理的船舶，mmsi编号，以英文逗号隔开。增量更新，不变动原有船队船舶，输入的mmsi编号与原有重复时，新填入的不会增加到船队中。</param>
         /// <returns></returns>
-        public static async Task<string> UpdateFleetShip(string key, string fleet_id, string mmsis)
+        public static async Task<FleetResponse> UpdateFleetShip(string key, string fleet_id, string mmsis)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -882,18 +887,23 @@ namespace ShipxyApi
                 { "fleet_id", fleet_id },
                 { "mmsis", mmsis }
             };
-            return await getMethod("UpdateFleetShip", parameters);
+
+            string json = await postMethod("UpdateFleetShip", parameters);
+
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
         /// 9监控推送-9.1监控船队管理-设置监控船舶列表-船队船舶删除
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/RtL0w0iHDioEP6kvZcScIC95nSe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
         /// <param name="mmsis">船舶清单：必填，添加船队管理的船舶，mmsi编号，以英文逗号隔开。增量更新，不变动原有船队船舶，输入的mmsi编号与原有重复时，新填入的不会增加到船队中。</param>
         /// <returns></returns>
-        public static async Task<string> DeleteFleetShip(string key, string fleet_id, string mmsis)
+        public static async Task<FleetResponse> DeleteFleetShip(string key, string fleet_id, string mmsis)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -901,12 +911,17 @@ namespace ShipxyApi
                 { "fleet_id", fleet_id },
                 { "mmsis", mmsis }
             };
-            return await getMethod("DeleteFleetShip", parameters);
+
+            string json = await postMethod("DeleteFleetShip", parameters);
+
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
         /// 9监控推送-9.4区域监控推送-区域创建
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/A0hSwImnBiuKeMkkXOmcfEA9nBe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="area_bounds">区域范围：必填，经纬度逗号分隔，多个点减号分隔，如： （lng,lat - lng,lat - lng,lat ）经纬度数，多个经纬度坐标点必须按照顺时针或逆时针依次输入。</param>
@@ -940,7 +955,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.4区域监控推送-区域更新
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/A0hSwImnBiuKeMkkXOmcfEA9nBe
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="area_id">区域的ID：必填，区域的id，唯一标识，用来后续对区域的删改查</param>
@@ -972,7 +987,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.4区域监控推送-区域查询
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/A0hSwImnBiuKeMkkXOmcfEA9nBe
         /// </summary>
         /// <param name="key"></param>
         /// <param name="area_id"></param>
@@ -990,7 +1005,7 @@ namespace ShipxyApi
 
         /// <summary>
         /// 9监控推送-9.4区域监控推送-区域删除
-        /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
+        /// https://hiiau7lsqq.feishu.cn/wiki/A0hSwImnBiuKeMkkXOmcfEA9nBe
         /// </summary>
         /// <param name="key"></param>
         /// <param name="area_id"></param>
