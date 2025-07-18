@@ -218,18 +218,23 @@ namespace ShipxyApi
         /// https://hiiau7lsqq.feishu.cn/wiki/Vvd2wHECliYz6okSoYucTRXvnsd
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
-        /// <param name="parameters">
-        /// 键值对：
-        /// mmsi: 船舶mmsi编号：非必填，船舶mmsi编号，9位数字。请求时船舶mmsi编号、imo、呼号、名称必填一项，全部不填则请求失败。
-        /// imo: imo编号：非必填，船舶imo编号
-        /// call_sign: 船舶呼号：非必填，船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
-        /// ship_name: 船舶名称：非必填，船舶英文名称，如果不同船舶的名称相同，则同名船舶的档案都将返回
-        /// </param>
+        /// <param name="request">请求对象：包含船舶档案查询的参数</param>
         /// <returns></returns>
-        public static async Task<SearchShipParticularResponse> SearchShipParticular(string key, Dictionary<string, object> parameters)
-        {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
-            parameters.Add("key", key);
+        public static async Task<SearchShipParticularResponse> SearchShipParticular(string key, SearchShipParticularRequest request)
+        {   
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+            };
+            if (request.Mmsi != null)
+                parameters.Add("mmsi", request.Mmsi);
+            if (request.Imo != null)
+                parameters.Add("imo", request.Imo);
+            if (request.CallSign != null)
+                parameters.Add("call_sign", request.CallSign);
+            if (request.ShipName != null)
+                parameters.Add("ship_name", request.ShipName);
+
             string json = await getMethod("SearchShipParticular", parameters);
 
             SearchShipParticularResponse response = JsonSerializer.Deserialize<SearchShipParticularResponse>(json)
@@ -390,24 +395,25 @@ namespace ShipxyApi
         /// https://hiiau7lsqq.feishu.cn/wiki/Sv5rw61KVioV0ekq4ytcBpGgnGd
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
-        /// <param name="parameters">
-        /// 键值对：
-        /// mmsi: 船舶mmsi编号：非必填，船舶mmsi编号，9位数字。请求时船舶mmsi编号、imo、呼号、名称必填一项，全部不填则请求失败。
-        /// imo: imo编号：非必填，船舶imo编号
-        /// call_sign: 船舶呼号：非必填，船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
-        /// ship_name: 船舶名称：非必填，船舶英文名称，如果不同船舶的名称相同，则同名船舶的档案都将返回
-        /// </param>
-        /// <param name="start_time">开始时间：必填，历史靠港记录开始时间，Unix 时间戳start_time与end_time为必填项，表示查询[start_time，end_time]之间的结果，最多1次只能查询1年（366天）的靠港记录.</param>
-        /// <param name="end_time">结束时间：必填，历史靠港记录结束时间，unix 时间戳。</param>
-        /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
+        /// <param name="request">请求对象：包含船舶历史挂靠记录的参数</param>
         /// <returns></returns>
-        public static async Task<GetPortOfCallByShipResponse> GetPortofCallByShip(string key, Dictionary<string, object> parameters, int start_time, int end_time, int time_zone = 2)
+        public static async Task<GetPortOfCallByShipResponse> GetPortofCallByShip(string key, GetPortofCallByShipRequest request)
         {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
-            parameters.Add("key", key);
-            parameters.Add("start_time", start_time);
-            parameters.Add("end_time", end_time);
-            parameters.Add("time_zone", time_zone);
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "mmsi", request.Mmsi },
+                { "start_time", request.StartTime },
+                { "end_time", request.EndTime },
+            };
+            if (request.Imo != null)
+                parameters.Add("imo", request.Imo);
+            if (request.CallSign != null)
+                parameters.Add("call_sign", request.CallSign);
+            if (request.ShipName != null)
+                parameters.Add("ship_name", request.ShipName);
+            if (request.TimeZone != null)
+                parameters.Add("time_zone", request.TimeZone);  
 
             string json = await getMethod("GetPortofCallByShip", parameters);
 
@@ -421,26 +427,27 @@ namespace ShipxyApi
         /// https://hiiau7lsqq.feishu.cn/wiki/R01xw8GxYiPd08kGhDeckVojnSC
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
-        /// <param name="parameters">
-        /// 键值对：
-        /// mmsi: 船舶mmsi编号：非必填，船舶mmsi编号，9位数字。请求时船舶mmsi编号、imo、呼号、名称必填一项，全部不填则请求失败。
-        /// imo: imo编号：非必填，船舶imo编号
-        /// call_sign: 船舶呼号：非必填，船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
-        /// ship_name: 船舶名称：非必填，船舶英文名称，如果不同船舶的名称相同，则同名船舶的档案都将返回
-        /// </param>
-        /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
-        /// <param name="start_time">开始时间：必填，历史靠港记录开始时间，Unix 时间戳start_time与end_time为必填项，表示查询[start_time，end_time]之间的结果，最多1次只能查询1年（366天）的靠港记录.</param>
-        /// <param name="end_time">结束时间：必填，历史靠港记录结束时间，unix 时间戳。</param>
-        /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
+        /// <param name="request">请求对象：包含船舶挂靠指定港口的查询参数</param>
         /// <returns></returns>
-        public static async Task<GetPortOfCallByShipPortResponse> GetPortofCallByShipPort(string key, Dictionary<string, object> parameters, string port_code, int start_time, int end_time, int time_zone = 2)
-        {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
-            parameters.Add("key", key);
-            parameters.Add("port_code", port_code);
-            parameters.Add("start_time", start_time);
-            parameters.Add("end_time", end_time);
-            parameters.Add("time_zone", time_zone);
+        public static async Task<GetPortOfCallByShipPortResponse> GetPortofCallByShipPort(string key, GetPortofCallByShipPortRequest request)
+        {   
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "mmsi", request.Mmsi },
+                { "port_code", request.PortCode },
+                { "start_time", request.StartTime },
+                { "end_time", request.EndTime },
+            };
+
+            if (request.Imo != null)
+                parameters.Add("imo", request.Imo);
+            if (request.CallSign != null)
+                parameters.Add("call_sign", request.CallSign);
+            if (request.ShipName != null)
+                parameters.Add("ship_name", request.ShipName);
+            if (request.TimeZone != null)
+                parameters.Add("time_zone", request.TimeZone);  
 
             string json = await getMethod("GetPortofCallByShipPort", parameters);
 
@@ -454,20 +461,24 @@ namespace ShipxyApi
         /// https://hiiau7lsqq.feishu.cn/wiki/O3PRwZoAjiX3DdknudicZnVpnxH
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
-        /// <param name="parameters">
-        /// 键值对：
-        /// mmsi: 船舶mmsi编号：非必填，船舶mmsi编号，9位数字。请求时船舶mmsi编号、imo、呼号、名称必填一项，全部不填则请求失败。
-        /// imo: imo编号：非必填，船舶imo编号
-        /// call_sign: 船舶呼号：非必填，船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
-        /// ship_name: 船舶名称：非必填，船舶英文名称，如果不同船舶的名称相同，则同名船舶的档案都将返回
-        /// </param>
-        /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
+        /// <param name="request">请求对象：包含船舶状态查询的参数</param>
         /// <returns></returns>
-        public static async Task<GetShipStatusResponse> GetShipStatus(string key, Dictionary<string, object> parameters, int time_zone = 2)
-        {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
-            parameters.Add("key", key);
-            parameters.Add("time_zone", time_zone);
+        public static async Task<GetShipStatusResponse> GetShipStatus(string key, GetShipStatusRequest request)
+        {   
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+            };
+            if (request.Mmsi != null)
+                parameters.Add("mmsi", request.Mmsi);
+            if (request.Imo != null)
+                parameters.Add("imo", request.Imo);
+            if (request.CallSign != null)
+                parameters.Add("call_sign", request.CallSign);
+            if (request.ShipName != null)
+                parameters.Add("ship_name", request.ShipName);
+            if (request.timeZone != null)
+                parameters.Add("time_zone", request.timeZone);    
 
             string json = await getMethod("GetShipStatus", parameters);
 

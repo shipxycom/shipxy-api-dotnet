@@ -13,12 +13,8 @@ class Program
 
     static async Task Main(string[] args)
     {
-        Dictionary<string, object> parameters = new Dictionary<string, object>
-            {
-                { "mmsi", 477172700 }
-            };
 
-        // SearchShipResponse responseBody = await Shipxy.SearchShip(apiKey, "413961925");
+        SearchShipResponse responseBody = await Shipxy.SearchShip(apiKey, "413961925");
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
         // SingleShipResponse responseBody = await Shipxy.GetSingleShip(apiKey, 413961925);
         // Console.WriteLine(responseBody?.Data?.ShipCnname);
@@ -32,7 +28,11 @@ class Program
         // Console.WriteLine(responseBody?.Data?.ShipList?[0].ShipName);
         // ShipRegistryResponse responseBody = await Shipxy.GetShipRegistry(apiKey, 413961925);
         // Console.WriteLine(responseBody?.Data?.Registry);
-        // SearchShipParticularResponse responseBody = await Shipxy.SearchShipParticular(apiKey, parameters);
+        // SearchShipParticularRequest request = new SearchShipParticularRequest
+        // {
+        //     Mmsi = 477172700,
+        // };
+        // SearchShipParticularResponse responseBody = await Shipxy.SearchShipParticular(apiKey, request);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
         // Console.WriteLine(responseBody?.Data?[0]?.MainEngineList?[0].Designer);
 
@@ -52,12 +52,28 @@ class Program
         // Console.WriteLine(responseBody?.Data?.ShipData?.ShipName);
         // Console.WriteLine(responseBody?.Data?.ApproachData?[0]?.ApproachShip?.ShipName);
         // Console.WriteLine(responseBody?.Data?.ApproachData?[0]?.ApproachEvent?.Position);
-
-        // GetPortOfCallByShipResponse responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
+        // GetPortofCallByShipRequest request = new GetPortofCallByShipRequest
+        // {
+        //     Mmsi = 477172700,
+        //     StartTime = 1751007589,
+        //     EndTime = 1751440378,
+        // };
+        // GetPortOfCallByShipResponse responseBody = await Shipxy.GetPortofCallByShip(apiKey, request);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
-        // GetPortOfCallByShipPortResponse responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
+        // GetPortofCallByShipPortRequest request = new GetPortofCallByShipPortRequest
+        // {
+        //     Mmsi = 477172700,
+        //     PortCode = "CNSHG",
+        //     StartTime = 1751007589,
+        //     EndTime = 1751440378
+        // };
+        // GetPortOfCallByShipPortResponse responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, request);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
-        // GetShipStatusResponse responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
+        // GetShipStatusRequest request = new GetShipStatusRequest
+        // {
+        //     Mmsi = 477172700,
+        // };
+        // GetShipStatusResponse responseBody = await Shipxy.GetShipStatus(apiKey, request);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
         // GetPortOfCallByPortResponse responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
@@ -87,12 +103,11 @@ class Program
         // GetNavWarningResponse responseBody = await Shipxy.GetNavWarning(apiKey, "2024-07-21 20:00", "2024-09-21 20:00", 1);
         // Console.WriteLine(responseBody?.Data?[0].Title);
 
-        FleetRequest fleetRequest = new FleetRequest
-        {
-            FleetName = "测试船队3",
-            Mmsis = "477985703,412751693",
-        };
-
+        // FleetRequest fleetRequest = new FleetRequest
+        // {
+        //     FleetName = "测试船队3",
+        //     Mmsis = "477985703,412751693",
+        // };
         // FleetResponse responseBody = await Shipxy.AddFleet(apiKey, fleetRequest);
         // Console.WriteLine(responseBody?.Data?.FleetId);
         // FleetResponse responseBody = await Shipxy.UpdateFleet(apiKey, "0372ec4c-eead-49ce-b005-6ffa731cc1df", fleetRequest);

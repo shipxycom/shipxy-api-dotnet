@@ -1,6 +1,196 @@
 using System.Text.Json.Serialization;
 
 /// <summary>
+/// 请求数据模型，用于船舶历史挂靠记录
+/// </summary>
+public class GetPortofCallByShipRequest { 
+    /// <summary>
+    /// 船舶MMSI编号，9位数字
+    /// 必填
+    /// </summary>
+    public uint Mmsi { get; set; }
+
+    /// <summary>
+    /// IMO编号，根据IMO查询
+    /// 非必填
+    /// </summary>
+    public uint? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称
+    /// 提示：如果不同船舶的名称相同，则同名船舶的靠港记录都将返回
+    /// </summary>
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 船舶呼号
+    /// 匹配原则：空格可有可无，字母大小写忽略，但字母数字顺序和个数必须一致
+    /// 提示：如果不同船舶呼号相同，则相同呼号船舶的靠港记录都将返回
+    /// </summary>
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 历史靠港记录开始时间，Unix时间戳（秒）
+    /// 必填。start_time与end_time必须同时填写，查询[start_time,end_time]之间的结果
+    /// </summary>
+    public int StartTime { get; set; }
+
+    /// <summary>
+    /// 历史靠港记录结束时间，Unix时间戳（秒）
+    /// 必填。start_time与end_time必须同时填写
+    /// </summary>
+    public int EndTime { get; set; }
+
+    /// <summary>
+    /// 选填，时间类型
+    /// 1 - 当地时区，如果不存在，则使用零时区
+    /// 2 - 北京时区（默认）
+    /// 3 - 零时区（格林尼治平均时）
+    /// </summary>
+    public int? TimeZone { get; set; } = 2;
+}
+/// <summary>
+/// 请求数据模型，用于船舶挂靠指定港口记录
+/// </summary>
+public class GetPortofCallByShipPortRequest
+{
+    /// <summary>
+    /// 船舶MMSI编号，9位数字
+    /// 必填
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public uint Mmsi { get; set; }
+
+    /// <summary>
+    /// IMO编号，根据IMO查询
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public uint? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 船舶呼号
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 港口标准五位码
+    /// 必填
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string PortCode { get; set; } = null!;
+
+    /// <summary>
+    /// 历史靠港记录开始时间，Unix时间戳，单位秒
+    /// 必填。start_time与end_time必须同时填写，表示查询[start_time，end_time]之间的结果，
+    /// 最多一次只能查询1年（366天）的靠港记录
+    /// </summary>
+    [JsonPropertyName("start_time")]
+    public int StartTime { get; set; }
+
+    /// <summary>
+    /// 历史靠港记录结束时间，Unix时间戳，单位秒，UTC时间
+    /// 必填。start_time与end_time必须同时填写
+    /// </summary>
+    [JsonPropertyName("end_time")]
+    public int EndTime { get; set; }
+
+    /// <summary>
+    /// 时间类型（选填）
+    /// 1 表示当地时区，如果不存在则使用零时区；
+    /// 2 表示北京时区（默认）；
+    /// 3 表示零时区（格林尼治平均时）
+    /// </summary>
+    [JsonPropertyName("time_zone")]
+    public int? TimeZone { get; set; } = 2;
+}
+
+/// <summary>
+/// 请求数据模型，用于搜索船舶详细信息
+/// </summary>
+public class SearchShipParticularRequest
+{
+    /// <summary>
+    /// 船舶编号，MMSI，9位数字
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public uint? Mmsi { get; set; }
+
+    /// <summary>
+    /// IMO编号
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public uint? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称，如果不同船舶名称相同，则同名船舶档案都将返回
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+}
+
+/// <summary>
+/// 请求数据模型，用于船舶当前挂靠信息
+/// </summary>
+public class GetShipStatusRequest
+{
+    /// <summary>
+    /// 船舶编号，MMSI，9位数字
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public uint? Mmsi { get; set; }
+
+    /// <summary>
+    /// IMO编号
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public uint? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶呼号，如果不同船舶的呼号相同，则相同呼号档案都将返回
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称，如果不同船舶名称相同，则同名船舶档案都将返回
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称，如果不同船舶名称相同，则同名船舶档案都将返回
+    /// 非必填
+    /// </summary>
+    [JsonPropertyName("time_zone")]
+    public int? timeZone { get; set; }
+}
+
+
+/// <summary>
 /// 船队请求数据，用于创建或更新船队
 /// </summary>
 public class FleetRequest
