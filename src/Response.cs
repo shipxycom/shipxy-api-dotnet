@@ -911,3 +911,501 @@ public class GetBerthShipsResponse
     [JsonPropertyName("data")]
     public List<BerthShipData>? Data { get; set; }
 }
+
+
+/// <summary>
+/// 锚地船舶数据实体类
+/// </summary>
+public class AnchorShipData
+{
+    /// <summary>
+    /// 船舶mmsi编号，9 位数字
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public long? Mmsi { get; set; }
+
+    /// <summary>
+    /// imo编号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public long? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 船舶英文名称
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public int? ShipType { get; set; }
+
+    /// <summary>
+    /// 船舶长度，米，取值范围(0-1022)
+    /// </summary>
+    [JsonPropertyName("length")]
+    public float? Length { get; set; }
+
+    /// <summary>
+    /// 船舶宽度，米
+    /// </summary>
+    [JsonPropertyName("width")]
+    public float? Width { get; set; }
+
+    /// <summary>
+    /// 左舷距，米
+    /// </summary>
+    [JsonPropertyName("left")]
+    public float? Left { get; set; }
+
+    /// <summary>
+    /// 尾距，米
+    /// </summary>
+    [JsonPropertyName("trail")]
+    public float? Trail { get; set; }
+
+    /// <summary>
+    /// 吃水深度，米
+    /// </summary>
+    [JsonPropertyName("draught")]
+    public float? Draught { get; set; }
+
+    /// <summary>
+    /// 到达时间，北京时间，格式如：2025-03-03 10:51:40
+    /// </summary>
+    [JsonPropertyName("arrival_time")]
+    public string? ArrivalTime { get; set; }
+
+    /// <summary>
+    /// 到达时间，Unix时间戳，UTC时间
+    /// </summary>
+    [JsonPropertyName("arrival_time_utc")]
+    public string? ArrivalTimeUtc { get; set; }
+
+    /// <summary>
+    /// 船舶当前在港口持续停留的时间，单位分钟
+    /// </summary>
+    [JsonPropertyName("stay_time")]
+    public float? StayTime { get; set; }
+
+    /// <summary>
+    /// 航行状态，0表示正常，-1代表无效数据
+    /// </summary>
+    [JsonPropertyName("navistat")]
+    public int? Navistat { get; set; }
+}
+
+
+/// <summary>
+/// 获取锚地船舶响应结果实体类
+/// </summary>
+public class GetAnchorShipsResponse
+{
+    /// <summary>
+    /// 状态
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 结果信息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<AnchorShipData>? Data { get; set; }
+}
+
+
+/// <summary>
+/// ETA（预计到达时间）船舶数据实体类
+/// </summary>
+public class ETAShipData
+{
+    /// <summary>
+    /// MMSI 编号
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public int? Mmsi { get; set; }
+
+    /// <summary>
+    /// 船舶名称
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// IMO 编号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public int? Imo { get; set; }
+
+    /// <summary>
+    /// 载重吨，DWT
+    /// </summary>
+    [JsonPropertyName("dwt")]
+    public float? Dwt { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public string? ShipType { get; set; }
+
+    /// <summary>
+    /// 船舶长度，米
+    /// </summary>
+    [JsonPropertyName("length")]
+    public float? Length { get; set; }
+
+    /// <summary>
+    /// 船舶宽度，米
+    /// </summary>
+    [JsonPropertyName("width")]
+    public float? Width { get; set; }
+
+    /// <summary>
+    /// 吃水深度，米
+    /// </summary>
+    [JsonPropertyName("draught")]
+    public float? Draught { get; set; }
+
+    /// <summary>
+    /// 报告港中文名
+    /// </summary>
+    [JsonPropertyName("preport_cnname")]
+    public string? PReportCnName { get; set; }
+
+    /// <summary>
+    /// 上次时间，格式字符串
+    /// </summary>
+    [JsonPropertyName("last_time")]
+    public string? LastTime { get; set; }
+
+    /// <summary>
+    /// 上次时间，Unix 时间戳（UTC）
+    /// </summary>
+    [JsonPropertyName("last_time_utc")]
+    public int? LastTimeUtc { get; set; }
+
+    /// <summary>
+    /// 预计到达时间，格式字符串
+    /// </summary>
+    [JsonPropertyName("eta")]
+    public string? Eta { get; set; }
+
+    /// <summary>
+    /// 预计到达时间，Unix 时间戳（UTC）
+    /// </summary>
+    [JsonPropertyName("eta_utc")]
+    public int? EtaUtc { get; set; }
+
+    /// <summary>
+    /// 目的地
+    /// </summary>
+    [JsonPropertyName("dest")]
+    public string? Dest { get; set; }
+
+    /// <summary>
+    /// 船旗国
+    /// </summary>
+    [JsonPropertyName("ship_flag")]
+    public string? ShipFlag { get; set; }
+
+    /// <summary>
+    /// 船籍港
+    /// </summary>
+    [JsonPropertyName("registry")]
+    public string? Registry { get; set; }
+}
+
+
+/// <summary>
+/// 获取 ETA 船舶响应结果实体类
+/// </summary>
+public class GetETAShipsResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 响应消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数量
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 船舶数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<ETAShipData>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 船舶轨迹点实体类
+/// </summary>
+public class ShipTrackPoint
+{
+    /// <summary>
+    /// 数据来源
+    /// 0代表岸基或船基AIS基站，1代表卫星基站
+    /// </summary>
+    [JsonPropertyName("data_source")]
+    public byte? DataSource { get; set; }
+
+    /// <summary>
+    /// 点位更新时间，Unix时间戳
+    /// </summary>
+    [JsonPropertyName("utc")]
+    public long? Utc { get; set; }
+
+    /// <summary>
+    /// 纬度，WGS84坐标系
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public double? Lat { get; set; }
+
+    /// <summary>
+    /// 经度，WGS84坐标系
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public double? Lng { get; set; }
+
+    /// <summary>
+    /// 船速，单位节
+    /// 当返回值为-1时，代表无效数据
+    /// </summary>
+    [JsonPropertyName("sog")]
+    public float? Sog { get; set; }
+
+    /// <summary>
+    /// 航迹向，单位度
+    /// 当返回值为-1时，代表无效数据
+    /// </summary>
+    [JsonPropertyName("cog")]
+    public float? Cog { get; set; }
+}
+
+
+/// <summary>
+/// 获取船舶轨迹响应结果实体类
+/// </summary>
+public class GetShipTrackResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 响应消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 船舶轨迹点数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<ShipTrackPoint>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 靠泊船舶信息实体类
+/// </summary>
+public class ApproachShipInfo
+{
+    /// <summary>
+    /// 船舶 MMSI 编号
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public int? Mmsi { get; set; }
+
+    /// <summary>
+    /// IMO 编号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public int? Imo { get; set; }
+
+    /// <summary>
+    /// 船舶呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 船舶名称
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public int? ShipType { get; set; }
+}
+
+/// <summary>
+/// 靠泊事件信息实体类
+/// </summary>
+public class ApproachEventInfo
+{
+    /// <summary>
+    /// 靠泊区编号
+    /// </summary>
+    [JsonPropertyName("approach_zone")]
+    public int? ApproachZone { get; set; }
+
+    /// <summary>
+    /// 纬度
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public float? Lat { get; set; }
+
+    /// <summary>
+    /// 经度
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public float? Lng { get; set; }
+
+    /// <summary>
+    /// 港口代码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
+
+    /// <summary>
+    /// 位置描述
+    /// </summary>
+    [JsonPropertyName("position")]
+    public string? Position { get; set; }
+
+    /// <summary>
+    /// 靠泊时间（字符串格式）
+    /// </summary>
+    [JsonPropertyName("approach_time")]
+    public string? ApproachTime { get; set; }
+
+    /// <summary>
+    /// 靠泊时间，Unix时间戳
+    /// </summary>
+    [JsonPropertyName("approach_time_utc")]
+    public int? ApproachTimeUtc { get; set; }
+
+    /// <summary>
+    /// 离泊时间（字符串格式）
+    /// </summary>
+    [JsonPropertyName("separation_time")]
+    public string? SeparationTime { get; set; }
+
+    /// <summary>
+    /// 离泊时间，Unix时间戳
+    /// </summary>
+    [JsonPropertyName("separation_time_utc")]
+    public int? SeparationTimeUtc { get; set; }
+
+    /// <summary>
+    /// 靠泊时长，单位小时（或根据实际调整）
+    /// </summary>
+    [JsonPropertyName("duration")]
+    public float? Duration { get; set; }
+
+    /// <summary>
+    /// 船速，单位节
+    /// </summary>
+    [JsonPropertyName("sog")]
+    public float? Sog { get; set; }
+}
+
+
+/// <summary>
+/// 靠泊数据项实体类
+/// </summary>
+public class ApproachDataItem
+{
+    /// <summary>
+    /// 靠泊船舶信息
+    /// </summary>
+    [JsonPropertyName("approach_ship")]
+    public ApproachShipInfo? ApproachShip { get; set; }
+
+    /// <summary>
+    /// 靠泊事件信息
+    /// </summary>
+    [JsonPropertyName("approach_event")]
+    public ApproachEventInfo? ApproachEvent { get; set; }
+}
+
+
+/// <summary>
+/// 船舶靠泊数据实体类
+/// </summary>
+public class ShipApproachData
+{
+    /// <summary>
+    /// 船舶数据
+    /// </summary>
+    [JsonPropertyName("ship_data")]
+    public ApproachShipInfo? ShipData { get; set; }
+
+    /// <summary>
+    /// 靠泊数据列表
+    /// </summary>
+    [JsonPropertyName("approach_data")]
+    public List<ApproachDataItem>? ApproachData { get; set; }
+}
+
+/// <summary>
+/// 查询船舶靠泊响应实体类
+/// </summary>
+public class SearchShipApproachResponse
+{
+    /// <summary>
+    /// 状态
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 结果消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public ShipApproachData? Data { get; set; }
+}

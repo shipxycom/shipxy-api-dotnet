@@ -38,15 +38,21 @@ class Program
 
         // SearchPortResponse responseBody = await Shipxy.SearchPort(apiKey, "qingdao", 2);
         // Console.WriteLine(responseBody?.Data?[0].PortCnName);
-        GetBerthShipsResponse responseBody = await Shipxy.GetBerthShips(apiKey, "CNSHG", 90);
-        Console.WriteLine(responseBody?.Data?[0].ShipName);
-        // string responseBody = await Shipxy.GetAnchorShips(apiKey, "CNSHG", 90);
-        // string responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
+        // GetBerthShipsResponse responseBody = await Shipxy.GetBerthShips(apiKey, "CNSHG", 90);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // GetAnchorShipsResponse responseBody = await Shipxy.GetAnchorShips(apiKey, "CNSHG", 90);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // GetETAShipsResponse responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
+        // Console.WriteLine(responseBody?.Msg);
 
-        // string responseBody = await Shipxy.GetShipTrack(apiKey, 477172700, 1746612218, 1747044218);
-        // string responseBody = await Shipxy.SearchshipApproach(apiKey, 477172700, 1746612218, 1747044218);
+        // GetShipTrackResponse responseBody = await Shipxy.GetShipTrack(apiKey, 477172700, 1746612218, 1747044218);
+        // Console.WriteLine(responseBody?.Data?[0].Utc);
+        // SearchShipApproachResponse responseBody = await Shipxy.SearchshipApproach(apiKey, 477172700, 1746612218, 1747044218);
+        // Console.WriteLine(responseBody?.Data?.ShipData?.ShipName);
+        // Console.WriteLine(responseBody?.Data?.ApproachData?[0]?.ApproachShip?.ShipName);
+        // Console.WriteLine(responseBody?.Data?.ApproachData?[0]?.ApproachEvent?.Position);
 
-        // string responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
+        string responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
         // string responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
         // string responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
         // string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
@@ -107,6 +113,6 @@ class Program
         //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
         // );
 
-        Console.WriteLine(JsonSerializer.Serialize(responseBody));
+        // Console.WriteLine(JsonSerializer.Serialize(responseBody));
     }
 }

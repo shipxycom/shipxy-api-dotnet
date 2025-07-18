@@ -289,7 +289,7 @@ namespace ShipxyApi
         /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
         /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
         /// <returns></returns>
-        public static async Task<string> GetAnchorShips(string key, string port_code, int? ship_type = null)
+        public static async Task<GetAnchorShipsResponse> GetAnchorShips(string key, string port_code, int? ship_type = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -297,7 +297,11 @@ namespace ShipxyApi
                 { "port_code", port_code },
             };
             if (ship_type != null) parameters.Add("ship_type", ship_type);
-            return await getMethod("GetAnchorShips", parameters);
+            string json = await getMethod("GetAnchorShips", parameters);
+
+            GetAnchorShipsResponse response = JsonSerializer.Deserialize<GetAnchorShipsResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -310,7 +314,7 @@ namespace ShipxyApi
         /// <param name="end_time">结束时间：必填，结束时间，utc时间戳。单次请求查询中，开始时间和结束时间的间隔不超过1周。</param>
         /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
         /// <returns></returns>
-        public static async Task<string> GetETAShips(string key, string port_code, int start_time, int end_time, int? ship_type = null)
+        public static async Task<GetETAShipsResponse> GetETAShips(string key, string port_code, int start_time, int end_time, int? ship_type = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -320,7 +324,11 @@ namespace ShipxyApi
                 { "end_time", end_time },
             };
             if (ship_type != null) parameters.Add("ship_type", ship_type);
-            return await getMethod("GetETAShips", parameters);
+            string json = await getMethod("GetETAShips", parameters);
+
+            GetETAShipsResponse response = JsonSerializer.Deserialize<GetETAShipsResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -333,7 +341,7 @@ namespace ShipxyApi
         /// <param name="end_time">结束时间：必填，查询的截止时间，unix时间戳</param>
         /// <param name="output">输出格式：选填，输出数据格式类型选择：0为二进制 Base64 编码，1为json格式，默认为1。</param>
         /// <returns></returns>
-        public static async Task<string> GetShipTrack(string key, int mmsi, int start_time, int end_time, int output = 1)
+        public static async Task<GetShipTrackResponse> GetShipTrack(string key, int mmsi, int start_time, int end_time, int output = 1)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -343,7 +351,11 @@ namespace ShipxyApi
                 { "end_time", end_time },
                 { "output", output },
             };
-            return await getMethod("GetShipTrack", parameters);
+            string json = await getMethod("GetShipTrack", parameters);
+
+            GetShipTrackResponse response = JsonSerializer.Deserialize<GetShipTrackResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -356,7 +368,7 @@ namespace ShipxyApi
         /// <param name="end_time">结束时间：必填，结束时间，utc时间戳。单次请求查询中，开始时间和结束时间的间隔不超过1个月。</param>
         /// <param name="approach_zone">搭靠地区：选填，1代表港口地区搭靠；2代表锚地搭靠；3代表其他地点搭靠；不填写返回全部。</param>
         /// <returns></returns>
-        public static async Task<string> SearchshipApproach(string key, int mmsi, int start_time, int end_time, int? approach_zone = null)
+        public static async Task<SearchShipApproachResponse> SearchshipApproach(string key, int mmsi, int start_time, int end_time, int? approach_zone = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -366,7 +378,12 @@ namespace ShipxyApi
                 { "end_time", end_time },
             };
             if (approach_zone != null) parameters.Add("approach_zone", approach_zone);
-            return await getMethod("SearchshipApproach", parameters);
+
+            string json = await getMethod("SearchshipApproach", parameters);
+
+            SearchShipApproachResponse response = JsonSerializer.Deserialize<SearchShipApproachResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
         /// <summary>
         /// 4挂靠记录-4.1船舶历史挂靠记录
