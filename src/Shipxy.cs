@@ -755,21 +755,19 @@ namespace ShipxyApi
         /// https://hiiau7lsqq.feishu.cn/wiki/A3UBwJ7pViozTskSFwPcJ4Ldnze
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
-        /// <param name="fleet_name">船队名称：必填，为您创建的船队起名，用来后续查询和区分</param>
-        /// <param name="mmsis">船舶清单：必填，添加船队下管理的船舶信息，输入多个mmsi编号，用英文逗号隔开</param>
-        /// <param name="monitor">监控内容：必填，选择船队进行监控的内容，1代表船队船舶查询；2代表船位实时推送；3代表船舶到离事件推送；4代表动态ETA推送；5代表AIS异常事件推送；6代表区域监控推送；7代表船舶搭靠事件推送。多选以英文逗号隔开。</param>
+        /// <param name="fleetRequest">船队请求：必填，包含船队名称、船舶清单和监控内容的请求对象</param>
         /// <returns></returns>
-        public static async Task<FleetResponse> AddFleet(string key, string fleet_name, string mmsis, int monitor = 0)
+        public static async Task<FleetResponse> AddFleet(string key, FleetRequest fleetRequest)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
-                { "fleet_name", fleet_name },
-                { "mmsis", mmsis },
-                { "monitor", monitor }
+                { "fleet_name", fleetRequest.FleetName ?? throw new ArgumentNullException(nameof(fleetRequest.FleetName), "FleetName cannot be null") },
+                { "mmsis", fleetRequest.Mmsis ?? throw new ArgumentNullException(nameof(fleetRequest.Mmsis), "Mmsis cannot be null") },
+                { "monitor", fleetRequest.Monitor ?? throw new ArgumentNullException(nameof(fleetRequest.Monitor), "Monitor cannot be null") }
             };
 
-            string json = await getMethod("AddFleet", parameters);
+            string json = await postMethod("AddFleet", parameters);
 
             FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
@@ -782,19 +780,23 @@ namespace ShipxyApi
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
-        /// <param name="parameters">
-        /// fleet_name 船队名称：非必填，输入名称则更新船队名称
-        /// mmsis 船舶清单：非必填，批量更新船队船舶信息，输入船舶mmsi编号，以英文逗号隔开。覆盖式全量更新，不做单独的增加和减少。
-        /// monitor 监控内容：非必填，变更船队进行监控的内容，1代表船队船舶查询；2代表船位实时推送；3代表船舶到离事件推送；4代表动态ETA推送；5代表AIS异常事件推送；6代表区域监控推送；7代表船舶搭靠事件推送。多选以英文逗号隔开。覆盖式全量更新，不做单独的增加和减少。
-        /// </param>
+        /// <param name="fleetRequest">船队请求：必填，包含船队名称、船舶清单和监控内容的请求对象</param>
         /// <returns></returns>
-        public static async Task<FleetResponse> UpdateFleet(string key, string fleet_id, Dictionary<string, object> parameters)
+        public static async Task<FleetResponse> UpdateFleet(string key, string fleet_id, FleetRequest fleetRequest)
         {
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
-            parameters.Add("key", key);
-            parameters.Add("fleet_id", fleet_id);
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "fleet_id", fleet_id },
+            };
+            if (fleetRequest.FleetName != null)
+                parameters.Add("fleet_name", fleetRequest.FleetName);
+            if (fleetRequest.Mmsis != null)
+                parameters.Add("mmsis", fleetRequest.Mmsis);
+            if (fleetRequest.Monitor != null)
+                parameters.Add("monitor", fleetRequest.Monitor);
 
-            string json = await getMethod("UpdateFleet", parameters);
+            string json = await postMethod("UpdateFleet", parameters);
 
             FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
@@ -808,14 +810,19 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
         /// <returns></returns>
-        public static async Task<string> GetFleet(string key, string fleet_id)
+        public static async Task<FleetResponse> GetFleet(string key, string fleet_id)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "fleet_id", fleet_id },
             };
-            return await getMethod("GetFleet", parameters);
+
+            string json = await getMethod("GetFleet", parameters);
+
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -825,14 +832,19 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
         /// <returns></returns>
-        public static async Task<string> DeleteFleet(string key, string fleet_id)
+        public static async Task<BaseResponse> DeleteFleet(string key, string fleet_id)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "fleet_id", fleet_id },
             };
-            return await getMethod("DeleteFleet", parameters);
+
+            string json = await postMethod("DeleteFleet", parameters);
+
+            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>

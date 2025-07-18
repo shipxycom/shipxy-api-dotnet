@@ -1,6 +1,26 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+
+/// <summary>
+/// 基础响应类
+/// </summary>
+public class BaseResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 响应消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+}
+
+
 /// <summary>
 /// 返回搜索
 /// </summary>
