@@ -33,7 +33,7 @@ class Program
     static async Task Main(string[] args)
     {
         string apiKey = "请从 API控制台 申请";
-        string responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
+        ManyShipResponse responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
         Console.WriteLine(responseBody);
     }
 }
