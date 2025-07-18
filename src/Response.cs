@@ -3593,3 +3593,101 @@ public class FleetResponse
     [JsonPropertyName("data")]
     public FleetData? Data { get; set; }
 }
+
+
+
+/// <summary>
+/// 区域数据
+/// </summary>
+public class AreaData
+{
+    /// <summary>
+    /// 区域的ID，唯一标识，用来后续对区域的删改查
+    /// </summary>
+    [JsonPropertyName("area_id")]
+    public string? AreaId { get; set; }
+
+    /// <summary>
+    /// 区域范围，经纬度逗号分隔，多个点减号分隔，
+    /// 如：（lng,lat - lng,lat - lng,lat）。
+    /// 经纬度数，多个经纬度坐标点必须按照顺时针或逆时针依次输入。
+    /// </summary>
+    [JsonPropertyName("area_bounds")]
+    public string? AreaBounds { get; set; }
+
+    /// <summary>
+    /// 区域名称，为您创建的区域起名，用来后续查询和区分
+    /// </summary>
+    [JsonPropertyName("area_name")]
+    public string? AreaName { get; set; }
+
+    /// <summary>
+    /// 推送url，触发监控条件时候向这个url地址推送数据
+    /// </summary>
+    [JsonPropertyName("url")]
+    public string? Url { get; set; }
+
+    /// <summary>
+    /// 筛选类型，区域筛选监控的类型：
+    /// 1代表全部船舶，
+    /// 2代表根据船舶类型和长度筛选匹配，
+    /// 3代表船队船舶。
+    /// </summary>
+    [JsonPropertyName("filter_type")]
+    public int? FilterType { get; set; }
+
+    /// <summary>
+    /// 船舶类型，区域监控船舶的类型，根据船舶类型筛选监控并推送，
+    /// 多个类型使用英文逗号隔开，不填则全选。
+    /// 船舶类型列表请参考开发文档附录。
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public string? ShipType { get; set; }
+
+    /// <summary>
+    /// 船舶长度，区域监控船舶长度，根据船舶的长度筛选并推送，
+    /// 多个长度使用英文逗号隔开，不填则全选。
+    /// 1，代表0-40米；
+    /// 2，代表40-80米；
+    /// 3，代表80-160米；
+    /// 4，代表160-240米；
+    /// 5，代表240-320米；
+    /// 6，代表320米以上。
+    /// </summary>
+    [JsonPropertyName("length")]
+    public string? Length { get; set; }
+
+    /// <summary>
+    /// 船队id，区域监控船队，
+    /// 如果只想监控某一只或一批船舶在区域的进出情况，可以创建船队，
+    /// 输入fleet_id则会监控船队下所有船舶。
+    /// 填入此参数则不会再使用ship_type监控船只，只监控船队船舶。
+    /// </summary>
+    [JsonPropertyName("fleet_id")]
+    public string? FleetId { get; set; }
+}
+
+
+/// <summary>
+/// 区域响应数据
+/// </summary>
+public class AreaResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 描述信息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 区域数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public AreaData? Data { get; set; }
+}

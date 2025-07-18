@@ -108,17 +108,20 @@ class Program
         // FleetResponse responseBody = await Shipxy.DeleteFleetShip(apiKey, "0372ec4c-eead-49ce-b005-6ffa731cc1df", "477985700");
         // Console.WriteLine(responseBody?.Data?.Mmsis);
 
-        Dictionary<string, object> parameters2 = new Dictionary<string, object>
-            {
-                { "ship_type", "59" },
-                { "length", "100" },
-                { "fleet_id", "f777007b-fb88-4c4c-b4eb-db33e84e99ee" },
-            };
 
-        string responseBody = await Shipxy.AddArea(apiKey,
-            "119.846180,32.345143-119.814280,32.311867-119.4661,32.291067-119.375887,32.213847",
-            "浙江沿海区域1", "http://192.186.1.1:8000/Shipxy/testdemo", 3,  parameters2
-        );
+        AreaRequest areaRequest = new AreaRequest
+        {
+            AreaBounds = "119.846180,32.345143-119.814280,32.311867-119.4661,32.291067-119.375887,32.213847",
+            AreaName = "浙江沿海区域1",
+            Url = "http://192.186.1.1:8000/Shipxy/testdemo",
+            FilterType = 3,
+            ShipType = "59",
+            Length = "100",
+            FleetId = "0372ec4c-eead-49ce-b005-6ffa731cc1df"
+        };
+
+        // AreaResponse responseBody = await Shipxy.AddArea(apiKey, areaRequest);
+        // Console.WriteLine(responseBody?.Data?.AreaId);
 
         Dictionary<string, object> parameters3 = new Dictionary<string, object>
             {
