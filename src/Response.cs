@@ -1744,3 +1744,208 @@ public class GetPortOfCallByShipPortResponse
 }
 
 
+/// <summary>
+/// 港口信息实体类
+/// </summary>
+public class PortInfo
+{
+    /// <summary>
+    /// 港口代码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
+
+    /// <summary>
+    /// 港口名称（英文）
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 港口中文名
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnName { get; set; }
+
+    /// <summary>
+    /// 港口时区
+    /// </summary>
+    [JsonPropertyName("port_time_zone")]
+    public string? PortTimeZone { get; set; }
+
+    /// <summary>
+    /// 港口所属国家名称（英文）
+    /// </summary>
+    [JsonPropertyName("port_country_name")]
+    public string? PortCountryName { get; set; }
+
+    /// <summary>
+    /// 港口所属国家名称（中文）
+    /// </summary>
+    [JsonPropertyName("port_country_cnname")]
+    public string? PortCountryCnName { get; set; }
+
+    /// <summary>
+    /// 港口所属国家代码
+    /// </summary>
+    [JsonPropertyName("port_country_code")]
+    public string? PortCountryCode { get; set; }
+
+    /// <summary>
+    /// 到达锚地（带下划线，注意区分）
+    /// </summary>
+    [JsonPropertyName("arrive_anchorage")]
+    public string? ArriveAnchorage { get; set; }
+
+    /// <summary>
+    /// 实际到达时间（ATA）
+    /// </summary>
+    [JsonPropertyName("ata")]
+    public string? Ata { get; set; }
+
+    /// <summary>
+    /// 靠泊时间（ATB）
+    /// </summary>
+    [JsonPropertyName("atb")]
+    public string? Atb { get; set; }
+
+    /// <summary>
+    /// 实际离港时间（ATD）
+    /// </summary>
+    [JsonPropertyName("atd")]
+    public string? Atd { get; set; }
+
+    /// <summary>
+    /// 当前港口所属国家英文名
+    /// </summary>
+    [JsonPropertyName("country_en")]
+    public string? CountryEn { get; set; }
+
+    /// <summary>
+    /// 当前港口所属国家代码
+    /// </summary>
+    [JsonPropertyName("country_code")]
+    public string? CountryCode { get; set; }
+
+    /// <summary>
+    /// 到达锚地（无下划线，注意与上面字段区分，语义可能略有差异）
+    /// </summary>
+    [JsonPropertyName("arriveanchorage")]
+    public string? ArriveAnchorageAlt { get; set; }
+}
+
+
+/// <summary>
+/// 船舶状态数据实体类
+/// </summary>
+public class ShipStatusData
+{
+    /// <summary>
+    /// 船名
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// IMO号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public int? Imo { get; set; }
+
+    /// <summary>
+    /// MMSI号
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public int? Mmsi { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public string? ShipType { get; set; }
+
+    /// <summary>
+    /// 当前海区
+    /// </summary>
+    [JsonPropertyName("current_sea_area")]
+    public string? CurrentSeaArea { get; set; }
+
+    /// <summary>
+    /// 海区代码
+    /// </summary>
+    [JsonPropertyName("sea_area_code")]
+    public string? SeaAreaCode { get; set; }
+
+    /// <summary>
+    /// 当前城市
+    /// </summary>
+    [JsonPropertyName("current_city")]
+    public string? CurrentCity { get; set; }
+
+    /// <summary>
+    /// 当前城市代码
+    /// </summary>
+    [JsonPropertyName("current_city_code")]
+    public string? CurrentCityCode { get; set; }
+
+    /// <summary>
+    /// 经度
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public double? Lng { get; set; }
+
+    /// <summary>
+    /// 纬度
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public double? Lat { get; set; }
+
+    /// <summary>
+    /// 前一个港口信息
+    /// </summary>
+    [JsonPropertyName("previousport")]
+    public PortInfo? PreviousPort { get; set; }
+
+    /// <summary>
+    /// 当前港口信息
+    /// </summary>
+    [JsonPropertyName("currentport")]
+    public PortInfo? CurrentPort { get; set; }
+}
+
+
+/// <summary>
+/// 获取船舶状态响应实体类
+/// </summary>
+public class GetShipStatusResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 船舶状态数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<ShipStatusData>? Data { get; set; }
+}

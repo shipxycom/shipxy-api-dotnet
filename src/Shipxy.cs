@@ -463,12 +463,17 @@ namespace ShipxyApi
         /// </param>
         /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
         /// <returns></returns>
-        public static async Task<string> GetShipStatus(string key, Dictionary<string, object> parameters, int time_zone = 2)
+        public static async Task<GetShipStatusResponse> GetShipStatus(string key, Dictionary<string, object> parameters, int time_zone = 2)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
             parameters.Add("key", key);
             parameters.Add("time_zone", time_zone);
-            return await getMethod("GetShipStatus", parameters);
+
+            string json = await getMethod("GetShipStatus", parameters);
+
+            GetShipStatusResponse response = JsonSerializer.Deserialize<GetShipStatusResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>

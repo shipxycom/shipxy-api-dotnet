@@ -54,9 +54,10 @@ class Program
 
         // GetPortOfCallByShipResponse responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
         // Console.WriteLine(responseBody?.Data?[0].ShipName);
-        GetPortOfCallByShipPortResponse responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
+        // GetPortOfCallByShipPortResponse responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        GetShipStatusResponse responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
         Console.WriteLine(responseBody?.Data?[0].ShipName);
-        // string responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
         // string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
 
         // string responseBody = await Shipxy.PlanRouteByPoint(apiKey, "113.571144,22.844316", "121.58414,31.37979");
@@ -115,6 +116,6 @@ class Program
         //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
         // );
 
-        // Console.WriteLine(JsonSerializer.Serialize(responseBody));
+        Console.WriteLine(JsonSerializer.Serialize(responseBody));
     }
 }
