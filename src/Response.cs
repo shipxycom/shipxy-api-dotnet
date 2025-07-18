@@ -1572,3 +1572,175 @@ public class GetPortOfCallByShipResponse
     [JsonPropertyName("data")]
     public List<PortOfCallData>? Data { get; set; }
 }
+
+
+/// <summary>
+/// 靠泊港口船舶数据实体类
+/// </summary>
+public class PortOfCallByShipPortData
+{
+    /// <summary>
+    /// 船名
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// IMO号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public int? Imo { get; set; }
+
+    /// <summary>
+    /// MMSI号
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public int? Mmsi { get; set; }
+
+    /// <summary>
+    /// 船舶类型（字符串）
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public string? ShipType { get; set; }
+
+    /// <summary>
+    /// 港口中文名
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnName { get; set; }
+
+    /// <summary>
+    /// 港口名
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 港口时区
+    /// </summary>
+    [JsonPropertyName("port_time_zone")]
+    public string? PortTimeZone { get; set; }
+
+    /// <summary>
+    /// 港口代码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
+
+    /// <summary>
+    /// 码头名称
+    /// </summary>
+    [JsonPropertyName("terminal_name")]
+    public string? TerminalName { get; set; }
+
+    /// <summary>
+    /// 泊位名称
+    /// </summary>
+    [JsonPropertyName("berth_name")]
+    public string? BerthName { get; set; }
+
+    /// <summary>
+    /// 港口所在国家中文名
+    /// </summary>
+    [JsonPropertyName("port_country_cnname")]
+    public string? PortCountryCnName { get; set; }
+
+    /// <summary>
+    /// 港口所在国家名
+    /// </summary>
+    [JsonPropertyName("port_country_name")]
+    public string? PortCountryName { get; set; }
+
+    /// <summary>
+    /// 港口所在国家代码
+    /// </summary>
+    [JsonPropertyName("port_country_code")]
+    public string? PortCountryCode { get; set; }
+
+    /// <summary>
+    /// 到达锚地（假设 JSON 字段名为 "arriveanchorage"）
+    /// </summary>
+    [JsonPropertyName("arriveanchorage")]
+    public string? ArriveAnchorage { get; set; }
+
+    /// <summary>
+    /// 实际到达时间（ATA）
+    /// </summary>
+    [JsonPropertyName("ata")]
+    public string? Ata { get; set; }
+
+    /// <summary>
+    /// 靠泊时间（ATB）
+    /// </summary>
+    [JsonPropertyName("atb")]
+    public string? Atb { get; set; }
+
+    /// <summary>
+    /// 实际离港时间（ATD）
+    /// </summary>
+    [JsonPropertyName("atd")]
+    public string? Atd { get; set; }
+
+    /// <summary>
+    /// 到港吃水
+    /// </summary>
+    [JsonPropertyName("arrival_draught")]
+    public double? ArrivalDraught { get; set; }
+
+    /// <summary>
+    /// 离港吃水
+    /// </summary>
+    [JsonPropertyName("departure_draught")]
+    public double? DepartureDraught { get; set; }
+
+    /// <summary>
+    /// 停留时间
+    /// </summary>
+    [JsonPropertyName("stay_time")]
+    public double? StayTime { get; set; }
+
+    /// <summary>
+    /// 码头停留时间
+    /// </summary>
+    [JsonPropertyName("stay_terminal_time")]
+    public double? StayTerminalTime { get; set; }
+}
+
+
+/// <summary>
+/// 根据船舶获取靠泊港口响应实体类
+/// </summary>
+public class GetPortOfCallByShipPortResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<PortOfCallByShipPortData>? Data { get; set; }
+}
+
+
