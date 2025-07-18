@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ShipxyApi;
 
 class Program
-{   
-    // static string apiKey = Key.apiKey;
-    static string apiKey = "请从 API控制台 申请";
+{
+    static string apiKey = Key.apiKey;
+    // static string apiKey = "请从 API控制台 申请";
 
     static async Task Main(string[] args)
     {
@@ -16,17 +17,26 @@ class Program
                 { "mmsi", 477172700 }
             };
 
-        string responseBody = await Shipxy.SearchShip(apiKey, "coco", 2);
-        // string responseBody = await Shipxy.GetSingleShip(apiKey, 413961925);
-        // string responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
-        // string responseBody = await Shipxy.GetFleetShip(apiKey, "c02def78-a57d-4311-bee3-1c89a018cddf");
-        // string responseBody = await Shipxy.GetSurRoundingShip(apiKey, 413961925);
-        // string responseBody = await Shipxy.GetAreaShip(apiKey, "121.289063,35.424868-122.783203,35.281501-122.167969,33.979809");
-        // string responseBody = await Shipxy.GetShipRegistry(apiKey, 413961925);
+        // SearchShipResponse responseBody = await Shipxy.SearchShip(apiKey, "413961925");
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // SingleShipResponse responseBody = await Shipxy.GetSingleShip(apiKey, 413961925);
+        // Console.WriteLine(responseBody?.Data?.ShipCnname);
+        // ManyShipResponse responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // FleetShipResponse responseBody = await Shipxy.GetFleetShip(apiKey, "7c9f50b4-fdac-4935-97b4-bf301a24bd90");
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // SurRoundingShipResponse responseBody = await Shipxy.GetSurRoundingShip(apiKey, 413961925);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // AreaShipResponse responseBody = await Shipxy.GetAreaShip(apiKey, "121.289063,35.424868-122.783203,35.281501-122.167969,33.979809");
+        // Console.WriteLine(responseBody?.Data?.ShipList?[0].ShipName);
+        // ShipRegistryResponse responseBody = await Shipxy.GetShipRegistry(apiKey, 413961925);
+        // Console.WriteLine(responseBody?.Data?.Registry);
+        // SearchShipParticularResponse responseBody = await Shipxy.SearchShipParticular(apiKey, parameters);
+        // Console.WriteLine(responseBody?.Data?[0].ShipName);
+        // Console.WriteLine(responseBody?.Data?[0]?.MainEngineList?[0].Designer);
 
-        // string responseBody = await Shipxy.SearchShipParticular(apiKey, parameters);
 
-        // string responseBody = await Shipxy.SearchPort(apiKey, "qingdao", 2);
+        string responseBody = await Shipxy.SearchPort(apiKey, "qingdao", 2);
         // string responseBody = await Shipxy.GetBerthShips(apiKey, "CNSHG", 90);
         // string responseBody = await Shipxy.GetAnchorShips(apiKey, "CNSHG", 90);
         // string responseBody = await Shipxy.GetETAShips(apiKey, "CNSHG", 1746612218, 1747044218);
@@ -95,6 +105,6 @@ class Program
         //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
         // );
 
-        Console.WriteLine(responseBody);
+        Console.WriteLine(JsonSerializer.Serialize(responseBody));
     }
 }
