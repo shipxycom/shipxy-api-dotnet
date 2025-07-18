@@ -34,7 +34,14 @@ class Program
     {
         string apiKey = "请从 API控制台 申请";
         ManyShipResponse responseBody = await Shipxy.GetManyShip(apiKey, "413961925,477232800,477172700");
-        Console.WriteLine(responseBody);
+        Console.WriteLine(responseBody?.Data?[0].Mmsi);
+
+        var options = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // 禁用大部分转义
+            WriteIndented = true
+        };
+        Console.WriteLine(JsonSerializer.Serialize(responseBody, options));
     }
 }
 ```
