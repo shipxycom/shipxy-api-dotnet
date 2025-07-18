@@ -2233,3 +2233,1181 @@ public class PlanRouteByPortResponse
     [JsonPropertyName("data")]
     public PlanRouteByPortData? Data { get; set; }
 }
+
+
+/// <summary>
+/// 单个 ETA 船舶信息实体类
+/// </summary>
+public class SingleETAShipInfo
+{
+    /// <summary>
+    /// MMSI 号
+    /// </summary>
+    [JsonPropertyName("mmsi")]
+    public int? Mmsi { get; set; }
+
+    /// <summary>
+    /// IMO 号
+    /// </summary>
+    [JsonPropertyName("imo")]
+    public int? Imo { get; set; }
+
+    /// <summary>
+    /// 船名
+    /// </summary>
+    [JsonPropertyName("ship_name")]
+    public string? ShipName { get; set; }
+
+    /// <summary>
+    /// 呼号
+    /// </summary>
+    [JsonPropertyName("call_sign")]
+    public string? CallSign { get; set; }
+
+    /// <summary>
+    /// 船舶类型
+    /// </summary>
+    [JsonPropertyName("ship_type")]
+    public int? ShipType { get; set; }
+}
+
+
+/// <summary>
+/// 单个 ETA 位置点信息实体类
+/// </summary>
+public class SingleETALocationInfo
+{
+    /// <summary>
+    /// 经度
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public double? Lng { get; set; }
+
+    /// <summary>
+    /// 纬度
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public double? Lat { get; set; }
+
+    /// <summary>
+    /// 速度（单位可根据具体业务定义）
+    /// </summary>
+    [JsonPropertyName("speed")]
+    public double? Speed { get; set; }
+
+    /// <summary>
+    /// 航速（SOG，Speed Over Ground，单位可根据具体业务定义）
+    /// </summary>
+    [JsonPropertyName("sog")]
+    public double? Sog { get; set; }
+
+    /// <summary>
+    /// 海区名称
+    /// </summary>
+    [JsonPropertyName("sea_area")]
+    public string? SeaArea { get; set; }
+
+    /// <summary>
+    /// 海区编码
+    /// </summary>
+    [JsonPropertyName("sea_area_code")]
+    public int? SeaAreaCode { get; set; }
+}
+
+
+/// <summary>
+/// 单个 ETA 港口信息实体类
+/// </summary>
+public class SingleETAPortInfo
+{
+    /// <summary>
+    /// 港口代码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
+
+    /// <summary>
+    /// 港口中文名
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnname { get; set; }
+
+    /// <summary>
+    /// 港口英文名
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 时区（整数，例如 +8 表示东八区）
+    /// </summary>
+    [JsonPropertyName("time_zone")]
+    public int? TimeZone { get; set; }
+
+    /// <summary>
+    /// 港口所属国家代码
+    /// </summary>
+    [JsonPropertyName("port_country_code")]
+    public string? PortCountryCode { get; set; }
+
+    /// <summary>
+    /// 港口所属国家英文名
+    /// </summary>
+    [JsonPropertyName("port_country_name")]
+    public string? PortCountryName { get; set; }
+
+    /// <summary>
+    /// 港口所属国家中文名
+    /// </summary>
+    [JsonPropertyName("port_country_cnname")]
+    public string? PortCountryCnname { get; set; }
+
+    /// <summary>
+    /// 预计到港时间（ATA，单位需根据具体业务定义，通常为时间戳或时间字符串）
+    /// </summary>
+    [JsonPropertyName("ata")]
+    public double? Ata { get; set; }
+
+    /// <summary>
+    /// 预计靠泊时间（ATB）
+    /// </summary>
+    [JsonPropertyName("atb")]
+    public double? Atb { get; set; }
+
+    /// <summary>
+    /// 预计离港时间（ATD）
+    /// </summary>
+    [JsonPropertyName("atd")]
+    public double? Atd { get; set; }
+}
+
+
+/// <summary>
+/// 单个 ETA 下一港口信息实体类
+/// </summary>
+public class SingleETANextPortInfo
+{
+    /// <summary>
+    /// 港口代码
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public string? PortCode { get; set; }
+
+    /// <summary>
+    /// 港口中文名
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnname { get; set; }
+
+    /// <summary>
+    /// 港口名称（英文）
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 时区（整数，例如 +8 表示东八区）
+    /// </summary>
+    [JsonPropertyName("time_zone")]
+    public int? TimeZone { get; set; }
+
+    /// <summary>
+    /// 港口所属国家代码
+    /// </summary>
+    [JsonPropertyName("port_country_code")]
+    public string? PortCountryCode { get; set; }
+
+    /// <summary>
+    /// 港口所属国家英文名
+    /// </summary>
+    [JsonPropertyName("port_country_name")]
+    public string? PortCountryName { get; set; }
+
+    /// <summary>
+    /// 港口所属国家中文名
+    /// </summary>
+    [JsonPropertyName("port_country_cnname")]
+    public string? PortCountryCnname { get; set; }
+
+    /// <summary>
+    /// 已航行距离（单位根据业务定义，通常为海里或公里）
+    /// </summary>
+    [JsonPropertyName("sailed_distance")]
+    public double? SailedDistance { get; set; }
+
+    /// <summary>
+    /// 已航行时间（单位根据业务定义，可能为小时）
+    /// </summary>
+    [JsonPropertyName("sailed_time")]
+    public double? SailedTime { get; set; }
+
+    /// <summary>
+    /// AIS 报告的速度
+    /// </summary>
+    [JsonPropertyName("ais_speed")]
+    public double? AisSpeed { get; set; }
+
+    /// <summary>
+    /// 速度（单位与 ais_speed 一致）
+    /// </summary>
+    [JsonPropertyName("speed")]
+    public double? Speed { get; set; }
+
+    /// <summary>
+    /// 预计到达时间（字符串格式，具体格式根据业务定义）
+    /// </summary>
+    [JsonPropertyName("eta")]
+    public string? Eta { get; set; }
+
+    /// <summary>
+    /// 预计到达时间的 UTC 时间（整数，可能为时间戳）
+    /// </summary>
+    [JsonPropertyName("eta_utc")]
+    public int? EtaUtc { get; set; }
+
+    /// <summary>
+    /// 剩余距离（单位根据业务定义）
+    /// </summary>
+    [JsonPropertyName("remaining_distance")]
+    public double? RemainingDistance { get; set; }
+
+    /// <summary>
+    /// 距离（单位根据业务定义）
+    /// </summary>
+    [JsonPropertyName("distance")]
+    public double? Distance { get; set; }
+}
+
+
+/// <summary>
+/// 单个 ETA 精准数据汇总实体类
+/// </summary>
+public class GetSingleETAPreciseData
+{
+    /// <summary>
+    /// 船舶信息
+    /// </summary>
+    [JsonPropertyName("ship")]
+    public SingleETAShipInfo? Ship { get; set; }
+
+    /// <summary>
+    /// 位置信息
+    /// </summary>
+    [JsonPropertyName("location")]
+    public SingleETALocationInfo? Location { get; set; }
+
+    /// <summary>
+    /// 上一个港口信息
+    /// </summary>
+    [JsonPropertyName("preport")]
+    public SingleETAPortInfo? Preport { get; set; }
+
+    /// <summary>
+    /// 下一个港口信息
+    /// </summary>
+    [JsonPropertyName("nextport")]
+    public SingleETANextPortInfo? Nextport { get; set; }
+}
+
+
+
+
+/// <summary>
+/// 单个 ETA 精准响应实体类
+/// </summary>
+public class GetSingleETAPreciseResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 响应消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 响应数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public GetSingleETAPreciseData? Data { get; set; }
+}
+
+
+/// <summary>
+/// 天气点数据实体类，包含具体的气象参数。
+/// </summary>
+public class GetWeatherByPointData
+{
+    /// <summary>
+    /// 气压（单位可能是 hPa 或其他，依据具体接口文档）。
+    /// </summary>
+    [JsonPropertyName("bm500")]
+    public float? Bm500 { get; set; }
+
+    /// <summary>
+    /// 相对湿度，百分比。
+    /// </summary>
+    [JsonPropertyName("humidity")]
+    public float? Humidity { get; set; }
+
+    /// <summary>
+    /// 海洋风向（单位：度）。
+    /// </summary>
+    [JsonPropertyName("oceandir")]
+    public float? OceanDir { get; set; }
+
+    /// <summary>
+    /// 海洋风速（单位：米/秒 或其他）。
+    /// </summary>
+    [JsonPropertyName("oceanspeed")]
+    public float? OceanSpeed { get; set; }
+
+    /// <summary>
+    /// 大气压强（单位：hPa）。
+    /// </summary>
+    [JsonPropertyName("pressure")]
+    public float? Pressure { get; set; }
+
+    /// <summary>
+    /// 涨潮方向（单位：度）。
+    /// </summary>
+    [JsonPropertyName("swelldir")]
+    public float? SwellDir { get; set; }
+
+    /// <summary>
+    /// 涨潮高度（单位：米）。
+    /// </summary>
+    [JsonPropertyName("swellheight")]
+    public float? SwellHeight { get; set; }
+
+    /// <summary>
+    /// 涨潮周期（单位：秒）。
+    /// </summary>
+    [JsonPropertyName("swellperiod")]
+    public float? SwellPeriod { get; set; }
+
+    /// <summary>
+    /// 温度（单位：摄氏度）。
+    /// </summary>
+    [JsonPropertyName("temperature")]
+    public float? Temperature { get; set; }
+
+    /// <summary>
+    /// 能见度（单位：米或公里）。
+    /// </summary>
+    [JsonPropertyName("visibility")]
+    public float? Visibility { get; set; }
+
+    /// <summary>
+    /// 波浪高度（单位：米）。
+    /// </summary>
+    [JsonPropertyName("waveheight")]
+    public float? WaveHeight { get; set; }
+
+    /// <summary>
+    /// 风向（单位：度）。
+    /// </summary>
+    [JsonPropertyName("winddir")]
+    public float? WindDir { get; set; }
+
+    /// <summary>
+    /// 风速（单位：米/秒）。
+    /// </summary>
+    [JsonPropertyName("windspeed")]
+    public float? WindSpeed { get; set; }
+
+    /// <summary>
+    /// 发布时间，字符串格式，具体格式依据接口。
+    /// </summary>
+    [JsonPropertyName("publish_time")]
+    public string? PublishTime { get; set; }
+
+    /// <summary>
+    /// 经度（单位：度）。
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public float? Lng { get; set; }
+
+    /// <summary>
+    /// 纬度（单位：度）。
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public float? Lat { get; set; }
+}
+
+
+
+/// <summary>
+/// 天气点响应实体类，表示接口返回的整体结构。
+/// </summary>
+public class GetWeatherByPointResponse
+{
+    /// <summary>
+    /// 状态码，通常用来表示请求是否成功（例如 1 表示成功，0 表示失败）。
+    /// </summary>
+    [JsonPropertyName("status")]
+    public float? Status { get; set; }
+
+    /// <summary>
+    /// 返回信息，通常是对状态的描述或错误信息。
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 天气数据主体，具体包含温度、湿度等气象信息。
+    /// </summary>
+    [JsonPropertyName("data")]
+    public GetWeatherByPointData? Data { get; set; }
+}
+
+
+/// <summary>
+/// 海洋气象数据类
+/// </summary>
+public class WeatherData
+{
+    /// <summary>
+    /// 区域类型
+    /// 查询区域的类型：
+    /// 0：全部；
+    /// 1：沿岸；
+    /// 2：近海；
+    /// 3：远海
+    /// </summary>
+    [JsonPropertyName("weather_type")]
+    public int? WeatherType { get; set; }
+
+    /// <summary>
+    /// 海区名称
+    /// </summary>
+    [JsonPropertyName("sea_area")]
+    public string? SeaArea { get; set; }
+
+    /// <summary>
+    /// 预报时间
+    /// </summary>
+    [JsonPropertyName("publish_time")]
+    public string? PublishTime { get; set; }
+
+    /// <summary>
+    /// 中心点纬度
+    /// </summary>
+    [JsonPropertyName("center_lat")]
+    public double? CenterLat { get; set; }
+
+    /// <summary>
+    /// 中心点经度
+    /// </summary>
+    [JsonPropertyName("center_lng")]
+    public double? CenterLng { get; set; }
+
+    /// <summary>
+    /// 预报时间段（建议非空）
+    /// </summary>
+    [JsonPropertyName("forecastaging")]
+    public string? Forecastaging { get; set; }
+
+    /// <summary>
+    /// 气象信息：
+    /// 阴、晴、多云、小雨、中雨、大雨、暴雨、阵雨、雷阵雨
+    /// </summary>
+    [JsonPropertyName("meteorological")]
+    public string? Meteorological { get; set; }
+
+    /// <summary>
+    /// 风向：
+    /// 东风；东南风；东南东；东北风；东北东；
+    /// 南风；南南西；南南东；
+    /// 西风；西南风；西南西；西北风；西北西；
+    /// 北风；北北东；北北西
+    /// </summary>
+    [JsonPropertyName("winddirection")]
+    public string? Winddirection { get; set; }
+
+    /// <summary>
+    /// 风级
+    /// </summary>
+    [JsonPropertyName("windpower")]
+    public string? Windpower { get; set; }
+
+    /// <summary>
+    /// 浪高
+    /// </summary>
+    [JsonPropertyName("waveheight")]
+    public string? Waveheight { get; set; }
+
+    /// <summary>
+    /// 能见度（km）
+    /// </summary>
+    [JsonPropertyName("visibility")]
+    public double? Visibility { get; set; }
+}
+
+
+/// <summary>
+/// 获取天气响应类
+/// </summary>
+public class GetWeatherResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 信息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 天气数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<WeatherData>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 台风列表项，表示单个台风的基本信息
+/// 通常用于台风列表接口返回的台风数据封装
+/// </summary>
+public class TyphoonListItem
+{
+    /// <summary>
+    /// 台风序号
+    /// 无符号32位整数，唯一标识一个台风
+    /// </summary>
+    [JsonPropertyName("typhoon_id")]
+    public uint? TyphoonId { get; set; }
+
+    /// <summary>
+    /// 台风国际编号
+    /// 无符号32位整数，台风的国际编号
+    /// </summary>
+    [JsonPropertyName("typhoon_code")]
+    public uint? TyphoonCode { get; set; }
+
+    /// <summary>
+    /// 台风国内编号
+    /// 字符串类型，国内编号，前两位代表年份，后两位按时间先后排序
+    /// </summary>
+    [JsonPropertyName("typhoon_cncode")]
+    public string? TyphoonCncode { get; set; }
+
+    /// <summary>
+    /// 台风名称（中文）
+    /// 台风的中文名称
+    /// </summary>
+    [JsonPropertyName("typhoon_cnname")]
+    public string? TyphoonCnname { get; set; }
+
+    /// <summary>
+    /// 台风名称（英文）
+    /// 台风的英文名称
+    /// </summary>
+    [JsonPropertyName("typhoon_name")]
+    public string? TyphoonName { get; set; }
+
+    /// <summary>
+    /// 发生年份
+    /// 无符号32位整数，表示台风发生的年份
+    /// </summary>
+    [JsonPropertyName("current_year")]
+    public uint? CurrentYear { get; set; }
+
+    /// <summary>
+    /// 是否正在发生
+    /// 字符串类型，"ing" 表示台风正在进行中，否则为空字符串
+    /// </summary>
+    [JsonPropertyName("dataMark")]
+    public string? DataMark { get; set; }
+}
+
+
+/// <summary>
+/// 获取全部台风响应类
+/// 用于封装台风列表接口的响应数据，包含状态码、提示信息、台风总数以及台风列表数据
+/// </summary>
+public class GetAllTyphoonResponse
+{
+    /// <summary>
+    /// 状态码
+    /// 一般用于标识接口调用成功与否，具体含义根据接口定义
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 返回信息
+    /// 一般为接口调用结果的提示信息，如“成功”或错误原因
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 台风总数
+    /// 表示此次查询返回的台风总条目数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 台风列表数据
+    /// 具体的台风项集合，包含多个台风的详细信息
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<TyphoonListItem>? Data { get; set; }
+}
+
+/// <summary>
+/// 台风详细信息项
+/// 表示某一时刻台风的具体观测或预报数据
+/// </summary>
+public class TyphoonDetailItem
+{
+    /// <summary>
+    /// 台风序号
+    /// 无符号32位整数，唯一标识一个台风
+    /// </summary>
+    [JsonPropertyName("typhoon_id")]
+    public uint? TyphoonId { get; set; }
+
+    /// <summary>
+    /// 台风产生时间
+    /// 字符串类型，表示台风产生的时间
+    /// </summary>
+    [JsonPropertyName("typhoon_time")]
+    public string? TyphoonTime { get; set; }
+
+    /// <summary>
+    /// 预测信息
+    /// 字符串类型，若为空表示实际观测点，非空表示预测点
+    /// </summary>
+    [JsonPropertyName("forecast")]
+    public string? Forecast { get; set; }
+
+    /// <summary>
+    /// 预测时间范围
+    /// 字符串类型，表示预测的时间范围
+    /// </summary>
+    [JsonPropertyName("fhour")]
+    public string? Fhour { get; set; }
+
+    /// <summary>
+    /// 纬度
+    /// 双精度浮点数，台风中心纬度，采用 WGS84 坐标系
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public double? Lat { get; set; }
+
+    /// <summary>
+    /// 经度
+    /// 双精度浮点数，台风中心经度，采用 WGS84 坐标系
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public double? Lng { get; set; }
+
+    /// <summary>
+    /// 风级
+    /// 字节类型，风级范围5-18
+    /// </summary>
+    [JsonPropertyName("grade")]
+    public byte? Grade { get; set; }
+
+    /// <summary>
+    /// 风速
+    /// 单精度浮点数，单位为米/秒
+    /// </summary>
+    [JsonPropertyName("mspeed")]
+    public float? Mspeed { get; set; }
+
+    /// <summary>
+    /// 中心气压
+    /// 单精度浮点数，单位为百帕
+    /// </summary>
+    [JsonPropertyName("pressure")]
+    public float? Pressure { get; set; }
+
+    /// <summary>
+    /// 移动速度
+    /// 单精度浮点数，单位为千米/小时
+    /// </summary>
+    [JsonPropertyName("kspeed")]
+    public float? Kspeed { get; set; }
+
+    /// <summary>
+    /// 移向
+    /// 字符串类型，台风移动方向，East（东）、West（西）、South（南）、North（北）
+    /// </summary>
+    [JsonPropertyName("direction")]
+    public string? Direction { get; set; }
+
+    /// <summary>
+    /// 7级风圈半径
+    /// 单精度浮点数，单位千米
+    /// </summary>
+    [JsonPropertyName("radius7")]
+    public float? Radius7 { get; set; }
+
+    /// <summary>
+    /// 10级风圈半径
+    /// 单精度浮点数，单位千米
+    /// </summary>
+    [JsonPropertyName("radius10")]
+    public float? Radius10 { get; set; }
+
+    /// <summary>
+    /// 7级风圈半径标准差
+    /// 单精度浮点数，单位千米
+    /// </summary>
+    [JsonPropertyName("radius7_s")]
+    public float? Radius7S { get; set; }
+
+    /// <summary>
+    /// 10级风圈半径标准差
+    /// 单精度浮点数，单位千米
+    /// </summary>
+    [JsonPropertyName("radius10_s")]
+    public float? Radius10S { get; set; }
+
+    /// <summary>
+    /// 12级风圈半径标准差
+    /// 单精度浮点数，单位千米
+    /// </summary>
+    [JsonPropertyName("radius12_s")]
+    public float? Radius12S { get; set; }
+}
+
+
+/// <summary>
+/// 单个台风详情响应类
+/// 用于封装查询单个台风详细信息接口响应数据，包含状态码、提示信息、总条数及详细数据列表
+/// </summary>
+public class GetSingleTyphoonResponse
+{
+    /// <summary>
+    /// 状态码
+    /// 标识接口调用是否成功，具体含义由接口定义决定
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 返回信息
+    /// 一般为接口调用结果说明，如“成功”或错误信息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 数据总数
+    /// 返回的详细数据条目数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 台风详细信息列表
+    /// 具体的台风详细数据集合
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<TyphoonDetailItem>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 潮汐观测站信息
+/// </summary>
+public class TideStationInfo
+{
+    /// <summary>
+    /// 港口潮汐观测站ID
+    /// </summary>
+    [JsonPropertyName("port_code")]
+    public int? PortCode { get; set; }
+
+    /// <summary>
+    /// 港口名称（中文）
+    /// </summary>
+    [JsonPropertyName("port_cnname")]
+    public string? PortCnname { get; set; }
+
+    /// <summary>
+    /// 港口名称（英文）
+    /// </summary>
+    [JsonPropertyName("port_name")]
+    public string? PortName { get; set; }
+
+    /// <summary>
+    /// 港口国（中文）
+    /// </summary>
+    [JsonPropertyName("port_country_cnname")]
+    public string? PortCountryCnname { get; set; }
+
+    /// <summary>
+    /// 港口国（英文）
+    /// </summary>
+    [JsonPropertyName("port_country_name")]
+    public string? PortCountryName { get; set; }
+
+    /// <summary>
+    /// 坐标纬度，WGS84坐标系
+    /// </summary>
+    [JsonPropertyName("lat")]
+    public double? Lat { get; set; }
+
+    /// <summary>
+    /// 坐标经度，WGS84坐标系
+    /// </summary>
+    [JsonPropertyName("lng")]
+    public double? Lng { get; set; }
+
+    /// <summary>
+    /// 港口时区
+    /// </summary>
+    [JsonPropertyName("port_time_zone")]
+    public string? PortTimeZone { get; set; }
+
+    /// <summary>
+    /// 潮高基准面
+    /// </summary>
+    [JsonPropertyName("datumn")]
+    public string? Datumn { get; set; }
+
+    /// <summary>
+    /// 潮汐性质
+    /// </summary>
+    [JsonPropertyName("tide_type")]
+    public string? TideType { get; set; }
+}
+
+
+
+/// <summary>
+/// 获取潮汐信息响应结果
+/// </summary>
+public class GetTidesResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 信息提示
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 数据总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 潮汐观测站信息列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<TideStationInfo>? Data { get; set; }
+}
+
+
+/// <summary>
+/// 潮汐总览数据项，包含当前日期4个潮汐时间点及对应的潮汐高度和潮汐标题名称。
+/// </summary>
+public class TideOverviewItem
+{
+    /// <summary>
+    /// 日期
+    /// </summary>
+    [JsonPropertyName("tide_date")]
+    public string? TideDate { get; set; }
+
+    /// <summary>
+    /// 当前日期第一个潮汐时间点
+    /// </summary>
+    [JsonPropertyName("tide_time1")]
+    public string? TideTime1 { get; set; }
+
+    /// <summary>
+    /// 当前日期第二个潮汐时间点
+    /// </summary>
+    [JsonPropertyName("tide_time2")]
+    public string? TideTime2 { get; set; }
+
+    /// <summary>
+    /// 当前日期第三个潮汐时间点
+    /// </summary>
+    [JsonPropertyName("tide_time3")]
+    public string? TideTime3 { get; set; }
+
+    /// <summary>
+    /// 当前日期第四个潮汐时间点
+    /// </summary>
+    [JsonPropertyName("tide_time4")]
+    public string? TideTime4 { get; set; }
+
+    /// <summary>
+    /// 当前日期第一个时间点的潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("tide_height1")]
+    public float? TideHeight1 { get; set; }
+
+    /// <summary>
+    /// 当前日期第二个时间点的潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("tide_height2")]
+    public float? TideHeight2 { get; set; }
+
+    /// <summary>
+    /// 当前日期第三个时间点的潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("tide_height3")]
+    public float? TideHeight3 { get; set; }
+
+    /// <summary>
+    /// 当前日期第四个时间点的潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("tide_height4")]
+    public float? TideHeight4 { get; set; }
+
+    /// <summary>
+    /// 当前日期第一个潮汐标题名称
+    /// </summary>
+    [JsonPropertyName("tide_lowhigh1")]
+    public string? TideLowhigh1 { get; set; }
+
+    /// <summary>
+    /// 当前日期第二个潮汐标题名称
+    /// </summary>
+    [JsonPropertyName("tide_lowhigh2")]
+    public string? TideLowhigh2 { get; set; }
+
+    /// <summary>
+    /// 当前日期第三个潮汐标题名称
+    /// </summary>
+    [JsonPropertyName("tide_lowhigh3")]
+    public string? TideLowhigh3 { get; set; }
+
+    /// <summary>
+    /// 当前日期第四个潮汐标题名称
+    /// </summary>
+    [JsonPropertyName("tide_lowhigh4")]
+    public string? TideLowhigh4 { get; set; }
+}
+
+
+/// <summary>
+/// 潮汐详细项，包含一天24小时的潮高数据
+/// </summary>
+public class TideDetailItem
+{
+    /// <summary>
+    /// 日期
+    /// </summary>
+    [JsonPropertyName("tide_date")]
+    public string? TideDate { get; set; }
+
+    /// <summary>
+    /// 零点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h0")]
+    public float? H0 { get; set; }
+
+    /// <summary>
+    /// 1点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h1")]
+    public float? H1 { get; set; }
+
+    /// <summary>
+    /// 2点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h2")]
+    public float? H2 { get; set; }
+
+    /// <summary>
+    /// 3点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h3")]
+    public float? H3 { get; set; }
+
+    /// <summary>
+    /// 4点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h4")]
+    public float? H4 { get; set; }
+
+    /// <summary>
+    /// 5点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h5")]
+    public float? H5 { get; set; }
+
+    /// <summary>
+    /// 6点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h6")]
+    public float? H6 { get; set; }
+
+    /// <summary>
+    /// 7点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h7")]
+    public float? H7 { get; set; }
+
+    /// <summary>
+    /// 8点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h8")]
+    public float? H8 { get; set; }
+
+    /// <summary>
+    /// 9点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h9")]
+    public float? H9 { get; set; }
+
+    /// <summary>
+    /// 10点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h10")]
+    public float? H10 { get; set; }
+
+    /// <summary>
+    /// 11点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h11")]
+    public float? H11 { get; set; }
+
+    /// <summary>
+    /// 12点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h12")]
+    public float? H12 { get; set; }
+
+    /// <summary>
+    /// 13点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h13")]
+    public float? H13 { get; set; }
+
+    /// <summary>
+    /// 14点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h14")]
+    public float? H14 { get; set; }
+
+    /// <summary>
+    /// 15点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h15")]
+    public float? H15 { get; set; }
+
+    /// <summary>
+    /// 16点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h16")]
+    public float? H16 { get; set; }
+
+    /// <summary>
+    /// 17点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h17")]
+    public float? H17 { get; set; }
+
+    /// <summary>
+    /// 18点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h18")]
+    public float? H18 { get; set; }
+
+    /// <summary>
+    /// 19点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h19")]
+    public float? H19 { get; set; }
+
+    /// <summary>
+    /// 20点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h20")]
+    public float? H20 { get; set; }
+
+    /// <summary>
+    /// 21点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h21")]
+    public float? H21 { get; set; }
+
+    /// <summary>
+    /// 22点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h22")]
+    public float? H22 { get; set; }
+
+    /// <summary>
+    /// 23点时潮汐高度，单位：米
+    /// </summary>
+    [JsonPropertyName("h23")]
+    public float? H23 { get; set; }
+}
+
+
+/// <summary>
+/// 获取潮汐数据的响应数据主体
+/// </summary>
+public class GetTideDataData
+{
+    /// <summary>
+    /// 潮汐总览数据项列表
+    /// </summary>
+    [JsonPropertyName("overview")]
+    public List<TideOverviewItem>? Overview { get; set; }
+
+    /// <summary>
+    /// 潮汐详细数据项列表
+    /// </summary>
+    [JsonPropertyName("detail")]
+    public List<TideDetailItem>? Detail { get; set; }
+}
+
+
+/// <summary>
+/// 获取潮汐数据的响应体
+/// </summary>
+public class GetTideDataResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 返回消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 响应数据主体
+    /// </summary>
+    [JsonPropertyName("data")]
+    public GetTideDataData? Data { get; set; }
+}

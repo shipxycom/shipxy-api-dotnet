@@ -571,7 +571,7 @@ namespace ShipxyApi
         /// <param name="port_code">港口标准code：非必填，港口标准CODE值，可以使用港口查询API获取。如果此处不填写港口，则默认查询船舶在AIS中填写的下一目的港口。</param>
         /// <param name="speed">设定船速：非必填，船舶在接下来的航行中维持的速度，单位：节。如果此处不填写，则默认按照船舶近一个月的平均航速来计算预计到达，平均航速是去掉在港口地区锚泊的船速信息后计算的平均值。</param>
         /// <returns></returns>
-        public static async Task<string> GetSingleETAPrecise(string key, int mmsi, string? port_code = null, double? speed = null)
+        public static async Task<GetSingleETAPreciseResponse> GetSingleETAPrecise(string key, int mmsi, string? port_code = null, double? speed = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -580,7 +580,12 @@ namespace ShipxyApi
             };
             if (port_code != null) parameters.Add("port_code", port_code);
             if (speed != null) parameters.Add("speed", speed);
-            return await getMethod("GetSingleETAPrecise", parameters);
+
+            string json = await getMethod("GetSingleETAPrecise", parameters);
+
+            GetSingleETAPreciseResponse response = JsonSerializer.Deserialize<GetSingleETAPreciseResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -592,7 +597,7 @@ namespace ShipxyApi
         /// <param name="lat">纬度：必填，WGS84坐标系，格式为lat=20.2134。</param>
         /// <param name="weather_time">时间：非必填，utc时间，Unix时间戳。不填写则查询最近时间的气象数据。</param>
         /// <returns></returns>
-        public static async Task<string> GetWeatherByPoint(string key, double lng, double lat, int? weather_time = null)
+        public static async Task<GetWeatherByPointResponse> GetWeatherByPoint(string key, double lng, double lat, int? weather_time = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -601,7 +606,12 @@ namespace ShipxyApi
                 { "lat", lat },
             };
             if (weather_time != null) parameters.Add("weather_time", weather_time);
-            return await getMethod("GetWeatherByPoint", parameters);
+
+            string json = await getMethod("GetWeatherByPoint", parameters);
+
+            GetWeatherByPointResponse response = JsonSerializer.Deserialize<GetWeatherByPointResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -611,14 +621,19 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="weather_type">区域类型：必填，查询区域的类型：0：全部；1：沿岸；2：近海；3：远海。</param>
         /// <returns></returns>
-        public static async Task<string> GetWeather(string key, int weather_type)
+        public static async Task<GetWeatherResponse> GetWeather(string key, int weather_type)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "weather_type", weather_type },
             };
-            return await getMethod("GetWeather", parameters);
+
+            string json = await getMethod("GetWeather", parameters);
+
+            GetWeatherResponse response = JsonSerializer.Deserialize<GetWeatherResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -627,13 +642,18 @@ namespace ShipxyApi
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <returns></returns>
-        public static async Task<string> GetAllTyphoon(string key)
+        public static async Task<GetAllTyphoonResponse> GetAllTyphoon(string key)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
             };
-            return await getMethod("GetAllTyphoon", parameters);
+
+            string json = await getMethod("GetAllTyphoon", parameters);
+
+            GetAllTyphoonResponse response = JsonSerializer.Deserialize<GetAllTyphoonResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -643,14 +663,19 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="typhoon_id">台风序号：必填，通过查询台风列表获得</param>
         /// <returns></returns>
-        public static async Task<string> GetSingleTyphoon(string key, int typhoon_id)
+        public static async Task<GetSingleTyphoonResponse> GetSingleTyphoon(string key, int typhoon_id)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "typhoon_id", typhoon_id }
             };
-            return await getMethod("GetSingleTyphoon", parameters);
+
+            string json = await getMethod("GetSingleTyphoon", parameters);
+
+            GetSingleTyphoonResponse response = JsonSerializer.Deserialize<GetSingleTyphoonResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -659,13 +684,18 @@ namespace ShipxyApi
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <returns></returns>
-        public static async Task<string> GetTides(string key)
+        public static async Task<GetTidesResponse> GetTides(string key)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
             };
-            return await getMethod("GetTides", parameters);
+
+            string json = await getMethod("GetTides", parameters);
+
+            GetTidesResponse response = JsonSerializer.Deserialize<GetTidesResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -677,7 +707,7 @@ namespace ShipxyApi
         /// <param name="start_date">起始日期：必填，查询潮汐起始日期（2022-09-26），支持从2020年开始往后的历史数据查询。</param>
         /// <param name="end_date">结束日期：必填，查询潮汐结束日期（2022-10-03）</param>
         /// <returns></returns>
-        public static async Task<string> GetTideData(string key, int port_code, string start_date, string end_date)
+        public static async Task<GetTideDataResponse> GetTideData(string key, int port_code, string start_date, string end_date)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -686,7 +716,12 @@ namespace ShipxyApi
                 { "start_date", start_date },
                 { "end_date", end_date }
             };
-            return await getMethod("GetTideData", parameters);
+
+            string json = await getMethod("GetTideData", parameters);
+
+            GetTideDataResponse response = JsonSerializer.Deserialize<GetTideDataResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>

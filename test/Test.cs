@@ -63,16 +63,25 @@ class Program
 
         // PlanRouteByPointResponse responseBody = await Shipxy.PlanRouteByPoint(apiKey, "113.571144,22.844316", "121.58414,31.37979");
         // Console.WriteLine(responseBody?.Data?.Route?[0].Lng);
-        PlanRouteByPortResponse responseBody = await Shipxy.PlanRouteByPort(apiKey, "CNGZG", "CNSHG");
-        Console.WriteLine(responseBody?.Data?.Route?[0].Lng);
-        // string responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
+        // PlanRouteByPortResponse responseBody = await Shipxy.PlanRouteByPort(apiKey, "CNGZG", "CNSHG");
+        // Console.WriteLine(responseBody?.Data?.Route?[0].Lng);
+        // GetSingleETAPreciseResponse responseBody = await Shipxy.GetSingleETAPrecise(apiKey, 477172700, "CNSHG");
+        // Console.WriteLine(responseBody?.Data?.Nextport?.PortCnname);
+        // Console.WriteLine(responseBody?.Data?.Location?.SeaAreaCode);
 
-        // string responseBody = await Shipxy.GetWeatherByPoint(apiKey, 123.58414, 27.37979);
-        // string responseBody = await Shipxy.GetWeather(apiKey, 1);
-        // string responseBody = await Shipxy.GetAllTyphoon(apiKey);
-        // string responseBody = await Shipxy.GetSingleTyphoon(apiKey, 2477927);
-        // string responseBody = await Shipxy.GetTides(apiKey);
-        // string responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
+        // GetWeatherByPointResponse responseBody = await Shipxy.GetWeatherByPoint(apiKey, 123.58414, 27.37979);
+        // Console.WriteLine(responseBody?.Data?.PublishTime);
+        // GetWeatherResponse responseBody = await Shipxy.GetWeather(apiKey, 1);
+        // Console.WriteLine(responseBody?.Data?[0].SeaArea);
+        // GetAllTyphoonResponse responseBody = await Shipxy.GetAllTyphoon(apiKey);
+        // Console.WriteLine(responseBody?.Data?[0].TyphoonCnname);
+        // GetSingleTyphoonResponse responseBody = await Shipxy.GetSingleTyphoon(apiKey, 2477927);
+        // Console.WriteLine(responseBody?.Data?[0].TyphoonTime);
+        // GetTidesResponse responseBody = await Shipxy.GetTides(apiKey);
+        // Console.WriteLine(responseBody?.Data?[0].PortCnname);
+        GetTideDataResponse responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
+        Console.WriteLine(responseBody?.Data?.Overview?[0].TideDate);
+        Console.WriteLine(responseBody?.Data?.Detail?[0].H12);
 
         // string responseBody = await Shipxy.GetNavWarning(apiKey, "2024-07-21 20:00", "2024-09-21 20:00", 1);
 
