@@ -401,14 +401,19 @@ namespace ShipxyApi
         /// <param name="end_time">结束时间：必填，历史靠港记录结束时间，unix 时间戳。</param>
         /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>
         /// <returns></returns>
-        public static async Task<string> GetPortofCallByShip(string key, Dictionary<string, object> parameters, int start_time, int end_time, int time_zone = 2)
+        public static async Task<GetPortOfCallByShipResponse> GetPortofCallByShip(string key, Dictionary<string, object> parameters, int start_time, int end_time, int time_zone = 2)
         {
-            if (parameters == null) return "Parameters cannot be null.";
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
             parameters.Add("key", key);
             parameters.Add("start_time", start_time);
             parameters.Add("end_time", end_time);
             parameters.Add("time_zone", time_zone);
-            return await getMethod("GetPortofCallByShip", parameters);
+
+            string json = await getMethod("GetPortofCallByShip", parameters);
+
+            GetPortOfCallByShipResponse response = JsonSerializer.Deserialize<GetPortOfCallByShipResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>

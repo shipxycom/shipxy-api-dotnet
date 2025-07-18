@@ -52,7 +52,8 @@ class Program
         // Console.WriteLine(responseBody?.Data?.ApproachData?[0]?.ApproachShip?.ShipName);
         // Console.WriteLine(responseBody?.Data?.ApproachData?[0]?.ApproachEvent?.Position);
 
-        string responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
+        GetPortOfCallByShipResponse responseBody = await Shipxy.GetPortofCallByShip(apiKey, parameters, 1751007589, 1751440378);
+        Console.WriteLine(responseBody?.Data?[0].ShipName);
         // string responseBody = await Shipxy.GetPortofCallByShipPort(apiKey, parameters, "CNSHG", 1751007589, 1751440378);
         // string responseBody = await Shipxy.GetShipStatus(apiKey, parameters);
         // string responseBody = await Shipxy.GetPortofCallByPort(apiKey, "CNSHG", 1751407589, 1751440378);
