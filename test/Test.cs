@@ -79,20 +79,23 @@ class Program
         // Console.WriteLine(responseBody?.Data?[0].TyphoonTime);
         // GetTidesResponse responseBody = await Shipxy.GetTides(apiKey);
         // Console.WriteLine(responseBody?.Data?[0].PortCnname);
-        GetTideDataResponse responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
-        Console.WriteLine(responseBody?.Data?.Overview?[0].TideDate);
-        Console.WriteLine(responseBody?.Data?.Detail?[0].H12);
+        // GetTideDataResponse responseBody = await Shipxy.GetTideData(apiKey, 8000005, "2025-03-01", "2025-03-05");
+        // Console.WriteLine(responseBody?.Data?.Overview?[0].TideDate);
+        // Console.WriteLine(responseBody?.Data?.Detail?[0].H12);
 
-        // string responseBody = await Shipxy.GetNavWarning(apiKey, "2024-07-21 20:00", "2024-09-21 20:00", 1);
+        // GetNavWarningResponse responseBody = await Shipxy.GetNavWarning(apiKey, "2024-07-21 20:00", "2024-09-21 20:00", 1);
+        // Console.WriteLine(responseBody?.Data?[0].Title);
 
-        // string responseBody = await Shipxy.AddFleet(apiKey, "测试船队1", "477985700,412751691", 1);
+        // FleetResponse responseBody = await Shipxy.AddFleet(apiKey, "测试船队1", "477985700,412751691", 1);
+        // Console.WriteLine(responseBody?.Data?.FleetId);
         Dictionary<string, object> parameters1 = new Dictionary<string, object>
             {
                 { "fleet_name", "fleet_name" },
                 { "mmsis", "412751690" },
                 { "monitor", 1 },
             };
-        // string responseBody = await Shipxy.UpdateFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2", parameters1);
+        FleetResponse responseBody = await Shipxy.UpdateFleet(apiKey, "0372ec4c-eead-49ce-b005-6ffa731cc1df", parameters1);
+        Console.WriteLine(responseBody?.Data?.FleetId);
         // string responseBody = await Shipxy.GetFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
         // string responseBody = await Shipxy.DeleteFleet(apiKey, "3e661c75-9155-43bc-a93b-6624eb7c5dc2");
         // string responseBody = await Shipxy.AddFleetShip(apiKey, "f777007b-fb88-4c4c-b4eb-db33e84e99ee", "477985700,412751690");
@@ -128,6 +131,6 @@ class Program
         //     "75021d99-f552-4d93-b2d7-2b67ca9f0840"
         // );
 
-        // Console.WriteLine(JsonSerializer.Serialize(responseBody));
+        Console.WriteLine(JsonSerializer.Serialize(responseBody));
     }
 }

@@ -3411,3 +3411,165 @@ public class GetTideDataResponse
     [JsonPropertyName("data")]
     public GetTideDataData? Data { get; set; }
 }
+
+
+/// <summary>
+/// 航行警告数据
+/// </summary>
+public class GetNavWarningData
+{
+    /// <summary>
+    /// 航行警告类型
+    /// 1 军事任务，2 船舶演习，3 实弹射击，
+    /// 4 船舶作业，5 航标动态，6 船舶搁浅，
+    /// 7 船舶试航，8 沉没，9 人员伤亡，
+    /// 10 施工作业，11 撤销航警，12 其他
+    /// </summary>
+    [JsonPropertyName("warning_type")]
+    public int? WarningType { get; set; }
+
+    /// <summary>
+    /// 航行警告数据源，如：中国海事局
+    /// </summary>
+    [JsonPropertyName("source")]
+    public string? Source { get; set; }
+
+    /// <summary>
+    /// 航行警告标题
+    /// </summary>
+    [JsonPropertyName("title")]
+    public string? Title { get; set; }
+
+    /// <summary>
+    /// 航行警告范围类型
+    /// 1 单个坐标点；2 多边形区域；3 圆形区域；4 无坐标信息
+    /// </summary>
+    [JsonPropertyName("range_type")]
+    public int? RangeType { get; set; }
+
+    /// <summary>
+    /// 范围坐标
+    /// WGS84坐标系，经度和纬度以英文","隔开，
+    /// 多个经纬度点位以英文";"隔开，
+    /// 涉及多个区域的以and符号隔开。
+    /// </summary>
+    [JsonPropertyName("range_points")]
+    public string? RangePoints { get; set; }
+
+    /// <summary>
+    /// 半径，单位：海里
+    /// 当范围类型为圆形区域时，表示圆心半径
+    /// </summary>
+    [JsonPropertyName("radius")]
+    public float? Radius { get; set; }
+
+    /// <summary>
+    /// 航行警告发布时间，北京时间，格式示例：2024-07-01 20:00
+    /// </summary>
+    [JsonPropertyName("pub_time")]
+    public string? PubTime { get; set; }
+
+    /// <summary>
+    /// 过期时间，北京时间，格式示例：2024-07-21 20:00
+    /// </summary>
+    [JsonPropertyName("expire_time")]
+    public string? ExpireTime { get; set; }
+
+    /// <summary>
+    /// 航行警告内容说明
+    /// </summary>
+    [JsonPropertyName("content")]
+    public string? Content { get; set; }
+}
+
+
+/// <summary>
+/// 航行警告响应
+/// </summary>
+public class GetNavWarningResponse
+{
+    /// <summary>
+    /// 状态码（浮点数）
+    /// </summary>
+    [JsonPropertyName("status")]
+    public float? Status { get; set; }
+
+    /// <summary>
+    /// 返回消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 航行警告数据总数
+    /// </summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
+
+    /// <summary>
+    /// 航行警告数据列表
+    /// </summary>
+    [JsonPropertyName("data")]
+    public List<GetNavWarningData>? Data { get; set; }
+}
+
+
+
+/// <summary>
+/// 船队数据
+/// </summary>
+public class FleetData
+{
+    /// <summary>
+    /// 船队ID
+    /// 船队的唯一标识，用于维护船队信息
+    /// </summary>
+    [JsonPropertyName("fleet_id")]
+    public string? FleetId { get; set; }
+
+    /// <summary>
+    /// 船队名称
+    /// 用于后续查询和区分不同船队
+    /// </summary>
+    [JsonPropertyName("fleet_name")]
+    public string? FleetName { get; set; }
+
+    /// <summary>
+    /// 船舶清单
+    /// 船队创建时所管理的所有船舶列表，包含多个MMSI编号
+    /// </summary>
+    [JsonPropertyName("mmsis")]
+    public string? Mmsis { get; set; }
+
+    /// <summary>
+    /// 监控内容
+    /// 船队所关联的监控内容，可通过更新船队信息API或控制台进行变更
+    /// </summary>
+    [JsonPropertyName("monitor")]
+    public string? Monitor { get; set; }
+}
+
+
+/// <summary>
+/// 船队响应数据
+/// </summary>
+public class FleetResponse
+{
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    [JsonPropertyName("status")]
+    public int? Status { get; set; }
+
+    /// <summary>
+    /// 返回消息
+    /// </summary>
+    [JsonPropertyName("msg")]
+    public string? Msg { get; set; }
+
+    /// <summary>
+    /// 船队数据
+    /// </summary>
+    [JsonPropertyName("data")]
+    public FleetData? Data { get; set; }
+}

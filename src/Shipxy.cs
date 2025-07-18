@@ -733,7 +733,7 @@ namespace ShipxyApi
         /// <param name="end_time">结束时间：必填，筛选航行警告发布时间</param>
         /// <param name="warning_type">警告类型：非必填，警告类型筛选，默认是0，返回全部类型。1军事任务，2船舶演习，3实弹射击，4船舶作业，5航标动态，6船舶搁浅，7船舶试航，8沉没，9人员伤亡，10施工作业，11撤销航警，12其他</param>
         /// <returns></returns>
-        public static async Task<string> GetNavWarning(string key, string start_time, string end_time, int warning_type = 0)
+        public static async Task<GetNavWarningResponse> GetNavWarning(string key, string start_time, string end_time, int warning_type = 0)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -742,7 +742,12 @@ namespace ShipxyApi
                 { "end_time", end_time },
                 { "warning_type", warning_type }
             };
-            return await getMethod("GetNavWarning", parameters);
+
+            string json = await getMethod("GetNavWarning", parameters);
+
+            GetNavWarningResponse response = JsonSerializer.Deserialize<GetNavWarningResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -754,7 +759,7 @@ namespace ShipxyApi
         /// <param name="mmsis">船舶清单：必填，添加船队下管理的船舶信息，输入多个mmsi编号，用英文逗号隔开</param>
         /// <param name="monitor">监控内容：必填，选择船队进行监控的内容，1代表船队船舶查询；2代表船位实时推送；3代表船舶到离事件推送；4代表动态ETA推送；5代表AIS异常事件推送；6代表区域监控推送；7代表船舶搭靠事件推送。多选以英文逗号隔开。</param>
         /// <returns></returns>
-        public static async Task<string> AddFleet(string key, string fleet_name, string mmsis, int monitor = 0)
+        public static async Task<FleetResponse> AddFleet(string key, string fleet_name, string mmsis, int monitor = 0)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -763,7 +768,12 @@ namespace ShipxyApi
                 { "mmsis", mmsis },
                 { "monitor", monitor }
             };
-            return await getMethod("AddFleet", parameters);
+
+            string json = await getMethod("AddFleet", parameters);
+
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
@@ -778,13 +788,17 @@ namespace ShipxyApi
         /// monitor 监控内容：非必填，变更船队进行监控的内容，1代表船队船舶查询；2代表船位实时推送；3代表船舶到离事件推送；4代表动态ETA推送；5代表AIS异常事件推送；6代表区域监控推送；7代表船舶搭靠事件推送。多选以英文逗号隔开。覆盖式全量更新，不做单独的增加和减少。
         /// </param>
         /// <returns></returns>
-        public static async Task<string> UpdateFleet(string key, string fleet_id, Dictionary<string, object> parameters)
+        public static async Task<FleetResponse> UpdateFleet(string key, string fleet_id, Dictionary<string, object> parameters)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters), "Parameters cannot be null.");
             parameters.Add("key", key);
             parameters.Add("fleet_id", fleet_id);
 
-            return await getMethod("UpdateFleet", parameters);
+            string json = await getMethod("UpdateFleet", parameters);
+
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+            return response;
         }
 
         /// <summary>
