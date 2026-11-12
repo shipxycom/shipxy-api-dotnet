@@ -372,6 +372,11 @@ public class SurRoundingShipResponse
 /// </summary>
 public class AreaShipData
 {
+    /// <summary>航标列表。</summary>
+    [JsonPropertyName("aton_list")] public List<AtonData>? AtonList { get; set; }
+    /// <summary>网位仪列表。</summary>
+    [JsonPropertyName("netbuoy_list")] public List<NetBuoyData>? NetBuoyList { get; set; }
+
     /// <summary>
     /// 总数
     /// </summary>
@@ -492,6 +497,9 @@ public class EngineInfo
 /// </summary>
 public class ShipParticularData
 {
+    /// <summary>船舶状态生效日期。</summary>
+    [JsonPropertyName("status_effective_date")] public string? StatusEffectiveDate { get; set; }
+
     /// <summary>船舶mmsi编号，9 位数字</summary>
     [JsonPropertyName("mmsi")]
     public long? Mmsi { get; set; }
@@ -617,7 +625,7 @@ public class ShipParticularData
     public string? ShipmanagerCountryCode { get; set; }
 
     /// <summary>船舶管理者所属国家</summary>
-    [JsonPropertyName("shipmanager_country")]
+    [JsonPropertyName("shipManager_country")]
     public string? ShipmanagerCountry { get; set; }
 
     /// <summary>船舶经营者代码</summary>
@@ -742,6 +750,9 @@ public class SearchShipParticularResponse
 /// </summary>
 public class PortData
 {
+    /// <summary>港口国家代码。</summary>
+    [JsonPropertyName("port_country_code")] public string? PortCountryCode { get; set; }
+
     /// <summary>
     /// 港口标准五位码
     /// </summary>

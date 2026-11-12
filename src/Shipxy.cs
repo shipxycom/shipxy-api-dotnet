@@ -25,7 +25,8 @@ namespace ShipxyApi
         /// <returns></returns>
         public static async Task<string> getMethod(string methodName, Dictionary<string, object> parameters)
         {
-            string queryString = string.Join("&", parameters.Where(p => p.Value != null).Select(p => $"{p.Key}={p.Value}"));
+            string queryString = string.Join("&", parameters.Where(p => p.Value != null).Select(p =>
+                $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(Convert.ToString(p.Value, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty)}"));
             UriBuilder uriBuilder = new UriBuilder(apiUrl + "/" + methodName);
             uriBuilder.Query = queryString; // 自动编码查询字符串部分
             Uri uri = uriBuilder.Uri; // 获取编码后的URI对象
@@ -76,8 +77,8 @@ namespace ShipxyApi
                 { "keywords", keywords },
                 { "max", max }
             };
-            // 调用POST方法，获取JSON字符串
-            string json = await postMethod("SearchShip", parameters);
+            // 按官方文档使用 GET 查询，获取 JSON 字符串。
+            string json = await getMethod("SearchShip", parameters);
 
             SearchShipResponse response = JsonSerializer.Deserialize<SearchShipResponse>(json)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
@@ -175,8 +176,9 @@ namespace ShipxyApi
         /// <param name="region">查询区域：必填，经纬度逗号分隔，多个点减号分隔，如： （lng,lat - lng,lat ）经纬度数，多个经纬度坐标点必须按照顺时针或逆时针依次输入。</param>
         /// <param name="output">输出格式：选填，输出数据格式类型选择：0为二进制 Base64 编码，1为json格式，默认为1</param>
         /// <param name="scode">会话令牌：选填，当区域范围船舶单次请求无法全部返回时，可以根据首次请求返回的scode再次请求剩余的数据，保证全部返回。</param>
+        /// <param name="data_type">选填：0船舶、1航标、2网位仪、3船舶和航标、4船舶和网位仪、5全部；非纯船舶数据需 output=1。</param>
         /// <returns></returns>
-        public static async Task<AreaShipResponse> GetAreaShip(string key, string region, int output = 1, int? scode = null)
+        public static async Task<AreaShipResponse> GetAreaShip(string key, string region, int output = 1, int? scode = null, int? data_type = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -185,6 +187,7 @@ namespace ShipxyApi
                 { "output", output },
             };
             if (scode != null) parameters.Add("scode", scode);
+            if (data_type != null) parameters.Add("data_type", data_type);
             string json = await getMethod("GetAreaShip", parameters);
 
             AreaShipResponse response = JsonSerializer.Deserialize<AreaShipResponse>(json)
@@ -271,8 +274,9 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
         /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
+        /// <param name="search_type">选填：1屏蔽长期未上报AIS的船舶，0返回全部。</param>
         /// <returns></returns>
-        public static async Task<GetBerthShipsResponse> GetBerthShips(string key, string port_code, int? ship_type = null)
+        public static async Task<GetBerthShipsResponse> GetBerthShips(string key, string port_code, int? ship_type = null, int? search_type = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -280,6 +284,7 @@ namespace ShipxyApi
                 { "port_code", port_code },
             };
             if (ship_type != null) parameters.Add("ship_type", ship_type);
+            if (search_type != null) parameters.Add("search_type", search_type);
             string json = await getMethod("GetBerthShips", parameters);
             GetBerthShipsResponse response = JsonSerializer.Deserialize<GetBerthShipsResponse>(json)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
@@ -293,8 +298,9 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
         /// <param name="ship_type">船舶类型：选填，筛选船舶的类型，船舶类型清单请参考文档，不填写时返回全部船舶。</param>
+        /// <param name="search_type">选填：1屏蔽长期未上报AIS的船舶，0返回全部。</param>
         /// <returns></returns>
-        public static async Task<GetAnchorShipsResponse> GetAnchorShips(string key, string port_code, int? ship_type = null)
+        public static async Task<GetAnchorShipsResponse> GetAnchorShips(string key, string port_code, int? ship_type = null, int? search_type = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -302,6 +308,7 @@ namespace ShipxyApi
                 { "port_code", port_code },
             };
             if (ship_type != null) parameters.Add("ship_type", ship_type);
+            if (search_type != null) parameters.Add("search_type", search_type);
             string json = await getMethod("GetAnchorShips", parameters);
 
             GetAnchorShipsResponse response = JsonSerializer.Deserialize<GetAnchorShipsResponse>(json)
@@ -493,7 +500,7 @@ namespace ShipxyApi
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="port_code">港口标准code：必填，港口标准五位码</param>
-        /// <param name="start_time">开始时间：必填，历史靠港记录开始时间，Unix 时间戳start_time与end_time为必填项，表示查询[start_time，end_time]之间的结果，最多1次只能查询1年（366天）的靠港记录.</param>
+        /// <param name="start_time">开始时间：必填，历史靠港记录开始时间，Unix 时间戳start_time与end_time为必填项，表示查询[start_time，end_time]之间的结果，最多1次只能查询1周的靠港记录.</param>
         /// <param name="end_time">结束时间：必填，历史靠港记录结束时间，unix 时间戳。</param>
         /// <param name="type">查询类型：选填，查询类型（选填）。1，按照ATA（到港时间）查询；2，按照ATD（离港时间）查询。默认值：1</param>
         /// <param name="time_zone">时区：选填，时间类型(选填)。 1当地时区，如果不存在，使用零时区；2北京时区；3零时区，即格林尼治平均时。默认值：2。</param>

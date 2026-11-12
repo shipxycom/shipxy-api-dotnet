@@ -74,3 +74,10 @@ class Program
 气象坐标为 WGS84；历史查询时间格式 `yyyy-MM-dd HH:mm:ss`，使用北京时间，
 开始时间不早于三年前、结束时间须在当前时间 24 小时以前，单次不超过一个月。
 响应 `observation_time` 为 UTC 时间。原有气象和国内潮汐接口继续保留。
+
+## 船舶与港口查询参数更新
+
+- `SearchShip` 按文档使用 GET。
+- `GetAreaShip` 增加可选 `data_type`：0 船舶（默认）、1 航标、2 网位仪、3 船舶和航标、4 船舶和网位仪、5 全部。含航标或网位仪时 `output` 需为 1（JSON），响应增加 `aton_list`、`netbuoy_list`。
+- `GetBerthShips`、`GetAnchorShips` 增加可选 `search_type`：1 屏蔽长期未上报 AIS 的船舶，0 返回全部。
+- `GetPortofCallByPort` 单次历史查询不超过一周；船舶维度的历史挂靠查询仍按其各自的时间限制。
