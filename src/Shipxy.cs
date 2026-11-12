@@ -1043,5 +1043,76 @@ namespace ShipxyApi
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
+        /// <summary>查询全球潮汐观测站列表。</summary>
+        public static async Task<GetGlobalTidesResponse> GetGlobalTides(string key)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "key", key }
+            };
+            string json = await getMethod("GetGlobalTides", parameters);
+            return JsonSerializer.Deserialize<GetGlobalTidesResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>查询全球观测站潮汐。port_code 为观测站 ID；日期 yyyy-MM-dd，单次不超过90天，未来不超过30天。</summary>
+        public static async Task<GetGlobalTideDataResponse> GetGlobalTideData(string key, int port_code, string start_date, string end_date)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "port_code", port_code },
+                { "start_date", start_date },
+                { "end_date", end_date }
+            };
+            string json = await getMethod("GetGlobalTideData", parameters);
+            return JsonSerializer.Deserialize<GetGlobalTideDataResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>查询 WGS84 坐标的实时大气和海洋气象。</summary>
+        public static async Task<GlobalWeatherResponse> CurrentWeather(string key, double lng, double lat)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "lng", lng },
+                { "lat", lat }
+            };
+            string json = await getMethod("CurrentWeather", parameters);
+            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>查询 WGS84 坐标的未来大气和海洋气象预报。</summary>
+        public static async Task<GlobalWeatherResponse> FutureWeather(string key, double lng, double lat)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "lng", lng },
+                { "lat", lat }
+            };
+            string json = await getMethod("FutureWeather", parameters);
+            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>查询历史气象。时间为北京时间 yyyy-MM-dd HH:mm:ss，单次不超过1个月，开始不早于3年前，结束须在24小时前。</summary>
+        public static async Task<GlobalWeatherResponse> HistoryWeather(string key, double lng, double lat, string start_time, string end_time)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "key", key },
+                { "lng", lng },
+                { "lat", lat },
+                { "start_time", start_time },
+                { "end_time", end_time }
+            };
+            string json = await getMethod("HistoryWeather", parameters);
+            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json)
+                ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
     }
 }
