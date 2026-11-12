@@ -2397,19 +2397,22 @@ public class SingleETAPortInfo
     /// 预计到港时间（ATA，单位需根据具体业务定义，通常为时间戳或时间字符串）
     /// </summary>
     [JsonPropertyName("ata")]
-    public double? Ata { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? Ata { get; set; }
 
     /// <summary>
     /// 预计靠泊时间（ATB）
     /// </summary>
     [JsonPropertyName("atb")]
-    public double? Atb { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? Atb { get; set; }
 
     /// <summary>
     /// 预计离港时间（ATD）
     /// </summary>
     [JsonPropertyName("atd")]
-    public double? Atd { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? Atd { get; set; }
 }
 
 
@@ -2822,7 +2825,8 @@ public class TyphoonListItem
     /// 无符号32位整数，唯一标识一个台风
     /// </summary>
     [JsonPropertyName("typhoon_id")]
-    public uint? TyphoonId { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? TyphoonId { get; set; }
 
     /// <summary>
     /// 台风国际编号
@@ -2914,7 +2918,8 @@ public class TyphoonDetailItem
     /// 无符号32位整数，唯一标识一个台风
     /// </summary>
     [JsonPropertyName("typhoon_id")]
-    public uint? TyphoonId { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? TyphoonId { get; set; }
 
     /// <summary>
     /// 台风产生时间
@@ -3005,21 +3010,24 @@ public class TyphoonDetailItem
     /// 单精度浮点数，单位千米
     /// </summary>
     [JsonPropertyName("radius7_s")]
-    public float? Radius7S { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? Radius7S { get; set; }
 
     /// <summary>
     /// 10级风圈半径标准差
     /// 单精度浮点数，单位千米
     /// </summary>
     [JsonPropertyName("radius10_s")]
-    public float? Radius10S { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? Radius10S { get; set; }
 
     /// <summary>
     /// 12级风圈半径标准差
     /// 单精度浮点数，单位千米
     /// </summary>
     [JsonPropertyName("radius12_s")]
-    public float? Radius12S { get; set; }
+    [JsonConverter(typeof(FlexibleApiStringConverter))]
+    public string? Radius12S { get; set; }
 }
 
 

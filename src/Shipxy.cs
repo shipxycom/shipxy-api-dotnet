@@ -16,6 +16,13 @@ namespace ShipxyApi
     {
         private static string apiUrl = "https://api.shipxy.com/apicall/v3";
         private static HttpClient client = new HttpClient();
+        private static readonly JsonSerializerOptions ResponseJsonOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString,
+            Converters = { new FlexibleApiStringConverter() }
+        };
+
 
         /// <summary>
         /// 通用方法，获取API方法
@@ -80,7 +87,7 @@ namespace ShipxyApi
             // 按官方文档使用 GET 查询，获取 JSON 字符串。
             string json = await getMethod("SearchShip", parameters);
 
-            SearchShipResponse response = JsonSerializer.Deserialize<SearchShipResponse>(json)
+            SearchShipResponse response = JsonSerializer.Deserialize<SearchShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -101,7 +108,7 @@ namespace ShipxyApi
             };
             string json = await getMethod("GetSingleShip", parameters);
 
-            SingleShipResponse response = JsonSerializer.Deserialize<SingleShipResponse>(json)
+            SingleShipResponse response = JsonSerializer.Deserialize<SingleShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -122,7 +129,7 @@ namespace ShipxyApi
             };
             string json = await getMethod("GetManyShip", parameters);
 
-            ManyShipResponse response = JsonSerializer.Deserialize<ManyShipResponse>(json)
+            ManyShipResponse response = JsonSerializer.Deserialize<ManyShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -143,7 +150,7 @@ namespace ShipxyApi
             };
             string json = await getMethod("GetFleetShip", parameters);
 
-            FleetShipResponse response = JsonSerializer.Deserialize<FleetShipResponse>(json)
+            FleetShipResponse response = JsonSerializer.Deserialize<FleetShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -163,7 +170,7 @@ namespace ShipxyApi
             };
             string json = await getMethod("GetSurRoundingShip", parameters);
 
-            SurRoundingShipResponse response = JsonSerializer.Deserialize<SurRoundingShipResponse>(json)
+            SurRoundingShipResponse response = JsonSerializer.Deserialize<SurRoundingShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -190,7 +197,7 @@ namespace ShipxyApi
             if (data_type != null) parameters.Add("data_type", data_type);
             string json = await getMethod("GetAreaShip", parameters);
 
-            AreaShipResponse response = JsonSerializer.Deserialize<AreaShipResponse>(json)
+            AreaShipResponse response = JsonSerializer.Deserialize<AreaShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -211,7 +218,7 @@ namespace ShipxyApi
             };
             string json = await getMethod("GetShipRegistry", parameters);
 
-            ShipRegistryResponse response = JsonSerializer.Deserialize<ShipRegistryResponse>(json)
+            ShipRegistryResponse response = JsonSerializer.Deserialize<ShipRegistryResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -240,7 +247,7 @@ namespace ShipxyApi
 
             string json = await getMethod("SearchShipParticular", parameters);
 
-            SearchShipParticularResponse response = JsonSerializer.Deserialize<SearchShipParticularResponse>(json)
+            SearchShipParticularResponse response = JsonSerializer.Deserialize<SearchShipParticularResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -262,7 +269,7 @@ namespace ShipxyApi
                 { "max", max }
             };
             string json = await getMethod("SearchPort", parameters);
-            SearchPortResponse response = JsonSerializer.Deserialize<SearchPortResponse>(json)
+            SearchPortResponse response = JsonSerializer.Deserialize<SearchPortResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -286,7 +293,7 @@ namespace ShipxyApi
             if (ship_type != null) parameters.Add("ship_type", ship_type);
             if (search_type != null) parameters.Add("search_type", search_type);
             string json = await getMethod("GetBerthShips", parameters);
-            GetBerthShipsResponse response = JsonSerializer.Deserialize<GetBerthShipsResponse>(json)
+            GetBerthShipsResponse response = JsonSerializer.Deserialize<GetBerthShipsResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -311,7 +318,7 @@ namespace ShipxyApi
             if (search_type != null) parameters.Add("search_type", search_type);
             string json = await getMethod("GetAnchorShips", parameters);
 
-            GetAnchorShipsResponse response = JsonSerializer.Deserialize<GetAnchorShipsResponse>(json)
+            GetAnchorShipsResponse response = JsonSerializer.Deserialize<GetAnchorShipsResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -338,7 +345,7 @@ namespace ShipxyApi
             if (ship_type != null) parameters.Add("ship_type", ship_type);
             string json = await getMethod("GetETAShips", parameters);
 
-            GetETAShipsResponse response = JsonSerializer.Deserialize<GetETAShipsResponse>(json)
+            GetETAShipsResponse response = JsonSerializer.Deserialize<GetETAShipsResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -365,7 +372,7 @@ namespace ShipxyApi
             };
             string json = await getMethod("GetShipTrack", parameters);
 
-            GetShipTrackResponse response = JsonSerializer.Deserialize<GetShipTrackResponse>(json)
+            GetShipTrackResponse response = JsonSerializer.Deserialize<GetShipTrackResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -393,7 +400,7 @@ namespace ShipxyApi
 
             string json = await getMethod("SearchshipApproach", parameters);
 
-            SearchShipApproachResponse response = JsonSerializer.Deserialize<SearchShipApproachResponse>(json)
+            SearchShipApproachResponse response = JsonSerializer.Deserialize<SearchShipApproachResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -424,7 +431,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetPortofCallByShip", parameters);
 
-            GetPortOfCallByShipResponse response = JsonSerializer.Deserialize<GetPortOfCallByShipResponse>(json)
+            GetPortOfCallByShipResponse response = JsonSerializer.Deserialize<GetPortOfCallByShipResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -458,7 +465,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetPortofCallByShipPort", parameters);
 
-            GetPortOfCallByShipPortResponse response = JsonSerializer.Deserialize<GetPortOfCallByShipPortResponse>(json)
+            GetPortOfCallByShipPortResponse response = JsonSerializer.Deserialize<GetPortOfCallByShipPortResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -489,7 +496,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetShipStatus", parameters);
 
-            GetShipStatusResponse response = JsonSerializer.Deserialize<GetShipStatusResponse>(json)
+            GetShipStatusResponse response = JsonSerializer.Deserialize<GetShipStatusResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -519,7 +526,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetPortofCallByPort", parameters);
 
-            GetPortOfCallByPortResponse response = JsonSerializer.Deserialize<GetPortOfCallByPortResponse>(json)
+            GetPortOfCallByPortResponse response = JsonSerializer.Deserialize<GetPortOfCallByPortResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -530,24 +537,26 @@ namespace ShipxyApi
         /// </summary>
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="start_point">起始点：必填，出发的位置点，lng,lat</param>
-        /// <param name="end_point">结束点：必填，到达的位置点，lng,lat</param>
+        /// <param name="end_point">结束点：与end_port_code至少填写一项，两项都填时终点港口优先。</param>
         /// <param name="avoid">绕航节点：非必填，需要避让的节点，id详见附录7 。绕航多节点时，不同id之间使用逗号分隔；不填则不绕航；一次请求绕航的节点控制在10个以内。</param>
         /// <param name="through">查询类型：非必填，必经的点，lng,lat - lng,lat；多点之间用“-”连接；不填则不必经；一次请求途经的节点控制在30个以内。</param>
+        /// <param name="end_port_code">与end_point至少填写一项，两者都填时港口优先。</param>
         /// <returns></returns>
-        public static async Task<PlanRouteByPointResponse> PlanRouteByPoint(string key, string start_point, string end_point, string? avoid = null, string? through = null)
+        public static async Task<PlanRouteByPointResponse> PlanRouteByPoint(string key, string start_point, string? end_point = null, string? avoid = null, string? through = null, string? end_port_code = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "start_point", start_point },
-                { "end_point", end_point },
+                { "end_point", end_point! },
             };
+            if (end_port_code != null) parameters.Add("end_port_code", end_port_code);
             if (avoid != null) parameters.Add("avoid", avoid);
             if (through != null) parameters.Add("through", through);
 
             string json = await getMethod("PlanRouteByPoint", parameters);
 
-            PlanRouteByPointResponse response = JsonSerializer.Deserialize<PlanRouteByPointResponse>(json)
+            PlanRouteByPointResponse response = JsonSerializer.Deserialize<PlanRouteByPointResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -575,7 +584,7 @@ namespace ShipxyApi
 
             string json = await getMethod("PlanRouteByPort", parameters);
 
-            PlanRouteByPortResponse response = JsonSerializer.Deserialize<PlanRouteByPortResponse>(json)
+            PlanRouteByPortResponse response = JsonSerializer.Deserialize<PlanRouteByPortResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -601,7 +610,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetSingleETAPrecise", parameters);
 
-            GetSingleETAPreciseResponse response = JsonSerializer.Deserialize<GetSingleETAPreciseResponse>(json)
+            GetSingleETAPreciseResponse response = JsonSerializer.Deserialize<GetSingleETAPreciseResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -627,7 +636,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetWeatherByPoint", parameters);
 
-            GetWeatherByPointResponse response = JsonSerializer.Deserialize<GetWeatherByPointResponse>(json)
+            GetWeatherByPointResponse response = JsonSerializer.Deserialize<GetWeatherByPointResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -649,7 +658,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetWeather", parameters);
 
-            GetWeatherResponse response = JsonSerializer.Deserialize<GetWeatherResponse>(json)
+            GetWeatherResponse response = JsonSerializer.Deserialize<GetWeatherResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -669,7 +678,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetAllTyphoon", parameters);
 
-            GetAllTyphoonResponse response = JsonSerializer.Deserialize<GetAllTyphoonResponse>(json)
+            GetAllTyphoonResponse response = JsonSerializer.Deserialize<GetAllTyphoonResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -681,7 +690,13 @@ namespace ShipxyApi
         /// <param name="key">授权码：必填，船讯网授权码，验证服务权限</param>
         /// <param name="typhoon_id">台风序号：必填，通过查询台风列表获得</param>
         /// <returns></returns>
-        public static async Task<GetSingleTyphoonResponse> GetSingleTyphoon(string key, int typhoon_id)
+        public static Task<GetSingleTyphoonResponse> GetSingleTyphoon(string key, int typhoon_id)
+        {
+            return GetSingleTyphoon(key, typhoon_id.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        /// <summary>使用官方字符串台风ID查询详情。</summary>
+        public static async Task<GetSingleTyphoonResponse> GetSingleTyphoon(string key, string typhoon_id)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -691,7 +706,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetSingleTyphoon", parameters);
 
-            GetSingleTyphoonResponse response = JsonSerializer.Deserialize<GetSingleTyphoonResponse>(json)
+            GetSingleTyphoonResponse response = JsonSerializer.Deserialize<GetSingleTyphoonResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -711,7 +726,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetTides", parameters);
 
-            GetTidesResponse response = JsonSerializer.Deserialize<GetTidesResponse>(json)
+            GetTidesResponse response = JsonSerializer.Deserialize<GetTidesResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -737,7 +752,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetTideData", parameters);
 
-            GetTideDataResponse response = JsonSerializer.Deserialize<GetTideDataResponse>(json)
+            GetTideDataResponse response = JsonSerializer.Deserialize<GetTideDataResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -763,7 +778,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetNavWarning", parameters);
 
-            GetNavWarningResponse response = JsonSerializer.Deserialize<GetNavWarningResponse>(json)
+            GetNavWarningResponse response = JsonSerializer.Deserialize<GetNavWarningResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -787,7 +802,7 @@ namespace ShipxyApi
 
             string json = await postMethod("AddFleet", parameters);
 
-            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -800,23 +815,23 @@ namespace ShipxyApi
         /// <param name="fleet_id">船队id：必填，船队的ID，用来对船队信息进行维护的唯一标识。</param>
         /// <param name="fleetRequest">船队请求：必填，包含船队名称、船舶清单和监控内容的请求对象</param>
         /// <returns></returns>
-        public static async Task<FleetResponse> UpdateFleet(string key, string fleet_id, FleetRequest fleetRequest)
+        public static async Task<FleetResponse> UpdateFleet(string key, string fleet_id, FleetRequest? fleetRequest = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "fleet_id", fleet_id },
             };
-            if (fleetRequest.FleetName != null)
+            if (fleetRequest?.FleetName != null)
                 parameters.Add("fleet_name", fleetRequest.FleetName);
-            if (fleetRequest.Mmsis != null)
+            if (fleetRequest?.Mmsis != null)
                 parameters.Add("mmsis", fleetRequest.Mmsis);
-            if (fleetRequest.Monitor != null)
+            if (fleetRequest?.Monitor != null)
                 parameters.Add("monitor", fleetRequest.Monitor);
 
             string json = await postMethod("UpdateFleet", parameters);
 
-            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -838,7 +853,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetFleet", parameters);
 
-            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -860,7 +875,7 @@ namespace ShipxyApi
 
             string json = await postMethod("DeleteFleet", parameters);
 
-            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json)
+            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -884,7 +899,7 @@ namespace ShipxyApi
 
             string json = await postMethod("AddFleetShip", parameters);
 
-            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -908,7 +923,7 @@ namespace ShipxyApi
 
             string json = await postMethod("UpdateFleetShip", parameters);
 
-            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -932,7 +947,7 @@ namespace ShipxyApi
 
             string json = await postMethod("DeleteFleetShip", parameters);
 
-            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json)
+            FleetResponse response = JsonSerializer.Deserialize<FleetResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -964,7 +979,7 @@ namespace ShipxyApi
 
             string json = await postMethod("AddArea", parameters);
 
-            AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json)
+            AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -977,31 +992,31 @@ namespace ShipxyApi
         /// <param name="area_id">区域的ID：必填，区域的id，唯一标识，用来后续对区域的删改查</param>
         /// <param name="areaRequest">区域请求：必填，包含区域范围、名称、推送URL等信息的请求对象</param>
         /// <returns></returns>
-        public static async Task<AreaResponse> UpdateArea(string key, string area_id, AreaRequest areaRequest)
+        public static async Task<AreaResponse> UpdateArea(string key, string area_id, AreaRequest? areaRequest = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "key", key },
                 { "area_id", area_id },
             };
-            if (areaRequest.AreaBounds != null)
+            if (areaRequest?.AreaBounds != null)
                 parameters.Add("area_bounds", areaRequest.AreaBounds);
-            if (areaRequest.AreaName != null)
+            if (areaRequest?.AreaName != null)
                 parameters.Add("area_name", areaRequest.AreaName);
-            if (areaRequest.Url != null)
+            if (areaRequest?.Url != null)
                 parameters.Add("url", areaRequest.Url);
-            if (areaRequest.FilterType != null)
+            if (areaRequest?.FilterType != null)
                 parameters.Add("filter_type", areaRequest.FilterType);
-            if (areaRequest.ShipType != null)
+            if (areaRequest?.ShipType != null)
                 parameters.Add("ship_type", areaRequest.ShipType);
-            if (areaRequest.Length != null)
+            if (areaRequest?.Length != null)
                 parameters.Add("length", areaRequest.Length);
-            if (areaRequest.FleetId != null)
+            if (areaRequest?.FleetId != null)
                 parameters.Add("fleet_id", areaRequest.FleetId);
 
             string json = await postMethod("UpdateArea", parameters);
 
-            AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json)
+            AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -1023,7 +1038,7 @@ namespace ShipxyApi
 
             string json = await getMethod("GetArea", parameters);
 
-            AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json)
+            AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -1046,7 +1061,7 @@ namespace ShipxyApi
 
             string json = await postMethod("DeleteArea", parameters);
 
-            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json)
+            BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
             return response;
         }
@@ -1058,7 +1073,7 @@ namespace ShipxyApi
                 { "key", key }
             };
             string json = await getMethod("GetGlobalTides", parameters);
-            return JsonSerializer.Deserialize<GetGlobalTidesResponse>(json)
+            return JsonSerializer.Deserialize<GetGlobalTidesResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
         }
 
@@ -1073,7 +1088,7 @@ namespace ShipxyApi
                 { "end_date", end_date }
             };
             string json = await getMethod("GetGlobalTideData", parameters);
-            return JsonSerializer.Deserialize<GetGlobalTideDataResponse>(json)
+            return JsonSerializer.Deserialize<GetGlobalTideDataResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
         }
 
@@ -1087,7 +1102,7 @@ namespace ShipxyApi
                 { "lat", lat }
             };
             string json = await getMethod("CurrentWeather", parameters);
-            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json)
+            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
         }
 
@@ -1101,7 +1116,7 @@ namespace ShipxyApi
                 { "lat", lat }
             };
             string json = await getMethod("FutureWeather", parameters);
-            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json)
+            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
         }
 
@@ -1117,9 +1132,68 @@ namespace ShipxyApi
                 { "end_time", end_time }
             };
             string json = await getMethod("HistoryWeather", parameters);
-            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json)
+            return JsonSerializer.Deserialize<GlobalWeatherResponse>(json, ResponseJsonOptions)
                 ?? throw new InvalidOperationException("Deserialization returned null.");
         }
+
+        /// <summary>独立航速提醒订阅服务。航速单位节，持续时间单位分钟。</summary>
+        public static async Task<BaseResponse> SubShipAlertOfSpeed(string key, string mmsi, string speed_limit, double? speed_duration = null)
+        {
+            var parameters = new Dictionary<string, object> { { "key", key }, { "mmsi", mmsi }, { "speed_limit", speed_limit } };
+            if (speed_duration != null) parameters.Add("speed_duration", speed_duration.Value);
+            string json = await getMethod("SubShipAlertOfSpeed", parameters);
+            return JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions) ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>独立航速提醒订阅服务。航速单位节，持续时间单位分钟。</summary>
+        public static async Task<BaseResponse> UnsubShipAlertOfSpeed(string key, string mmsi)
+        {
+            var parameters = new Dictionary<string, object> { { "key", key }, { "mmsi", mmsi } };
+            string json = await getMethod("UnsubShipAlertOfSpeed", parameters);
+            return JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions) ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>独立航速提醒订阅服务。航速单位节，持续时间单位分钟。</summary>
+        public static async Task<SearchSubShipAlertOfSpeedResponse> SearchSubShipAlertOfSpeed(string key)
+        {
+            var parameters = new Dictionary<string, object> { { "key", key } };
+            string json = await getMethod("SearchSubShipAlertOfSpeed", parameters);
+            return JsonSerializer.Deserialize<SearchSubShipAlertOfSpeedResponse>(json, ResponseJsonOptions) ?? throw new InvalidOperationException("Deserialization returned null.");
+        }
+
+        /// <summary>返回原始瓦片字节。光栅图需配合海图JS及相应服务权限。</summary>
+        public static Task<byte[]> GetShipRasterImage(string key, int tile_type, int x, int y, int z) => client.GetByteArrayAsync(GetShipRasterImageUrl(key, tile_type, x, y, z));
+
+        /// <summary>仅构造地图图层URL，不发送请求。</summary>
+        public static string GetShipRasterImageUrl(string key, int tile_type, int x, int y, int z) => BuildImageUrl("GetShipRasterImage", new Dictionary<string, object> { { "key", key }, { "tile_type", tile_type }, { "x", x }, { "y", y }, { "z", z } });
+
+        /// <summary>返回原始瓦片字节。光栅图需配合海图JS及相应服务权限。</summary>
+        public static Task<byte[]> GetPortTile(string key, string projection_type, int x, int y, int z) => client.GetByteArrayAsync(GetPortTileUrl(key, projection_type, x, y, z));
+
+        /// <summary>仅构造地图图层URL，不发送请求。</summary>
+        public static string GetPortTileUrl(string key, string projection_type, int x, int y, int z) => BuildImageUrl("GetPortTile", new Dictionary<string, object> { { "key", key }, { "projection_type", projection_type }, { "x", x }, { "y", y }, { "z", z } });
+
+        private static string BuildImageUrl(string name, Dictionary<string, object> parameters)
+        {
+            return apiUrl + "/" + name + "?" + string.Join("&", parameters.Select(p =>
+                Uri.EscapeDataString(p.Key) + "=" + Uri.EscapeDataString(Convert.ToString(p.Value, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty)));
+        }
+
+        /// <summary>????????????</summary>
+        public static Task<PlanRouteByPointResponse> PlanRouteByPoint(string key, string start_point, string end_point, string? avoid = null, string? through = null)
+            => PlanRouteByPoint(key, start_point, end_point, avoid, through, null);
+
+        /// <summary>?????????????</summary>
+        public static Task<AreaShipResponse> GetAreaShip(string key, string region, int output = 1, int? scode = null)
+            => GetAreaShip(key, region, output, scode, null);
+
+        /// <summary>????????????</summary>
+        public static Task<GetBerthShipsResponse> GetBerthShips(string key, string port_code, int? ship_type = null)
+            => GetBerthShips(key, port_code, ship_type, null);
+
+        /// <summary>????????????</summary>
+        public static Task<GetAnchorShipsResponse> GetAnchorShips(string key, string port_code, int? ship_type = null)
+            => GetAnchorShips(key, port_code, ship_type, null);
 
     }
 }
