@@ -347,6 +347,9 @@ public class FleetShipResponse
 /// </summary>
 public class SurRoundingShipResponse
 {
+    /// <summary>周边船舶总数。</summary>
+    [JsonPropertyName("total")]
+    public int? Total { get; set; }
     /// <summary>
     /// 状态
     /// </summary>
@@ -1446,6 +1449,14 @@ public class SearchShipApproachResponse
 /// </summary>
 public class PortOfCallData
 {
+    /// <summary>兼容PDF示例中的到锚字段拼写。</summary>
+    [JsonPropertyName("arrval_anchorage")]
+    public string? ArrivalAnchorageFromExample { set => ArrivalAnchorage ??= value; }
+
+    /// <summary>兼容PDF示例中的码头停留时间字段拼写。</summary>
+    [JsonPropertyName("stay_interminal_time")]
+    public double? StayTerminalTimeFromExample { set => StayTerminalTime ??= value; }
+
     /// <summary>
     /// 船名
     /// </summary>

@@ -23,7 +23,6 @@ namespace ShipxyApi
             Converters = { new FlexibleApiStringConverter() }
         };
 
-
         /// <summary>
         /// 通用方法，获取API方法
         /// </summary>
@@ -976,7 +975,6 @@ namespace ShipxyApi
             if (areaRequest.FleetId != null)
                 parameters.Add("fleet_id", areaRequest.FleetId);
 
-
             string json = await postMethod("AddArea", parameters);
 
             AreaResponse response = JsonSerializer.Deserialize<AreaResponse>(json, ResponseJsonOptions)
@@ -1058,7 +1056,6 @@ namespace ShipxyApi
                 { "area_id", area_id },
             };
 
-
             string json = await postMethod("DeleteArea", parameters);
 
             BaseResponse response = JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions)
@@ -1136,62 +1133,19 @@ namespace ShipxyApi
                 ?? throw new InvalidOperationException("Deserialization returned null.");
         }
 
-        /// <summary>独立航速提醒订阅服务。航速单位节，持续时间单位分钟。</summary>
-        public static async Task<BaseResponse> SubShipAlertOfSpeed(string key, string mmsi, string speed_limit, double? speed_duration = null)
-        {
-            var parameters = new Dictionary<string, object> { { "key", key }, { "mmsi", mmsi }, { "speed_limit", speed_limit } };
-            if (speed_duration != null) parameters.Add("speed_duration", speed_duration.Value);
-            string json = await getMethod("SubShipAlertOfSpeed", parameters);
-            return JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions) ?? throw new InvalidOperationException("Deserialization returned null.");
-        }
-
-        /// <summary>独立航速提醒订阅服务。航速单位节，持续时间单位分钟。</summary>
-        public static async Task<BaseResponse> UnsubShipAlertOfSpeed(string key, string mmsi)
-        {
-            var parameters = new Dictionary<string, object> { { "key", key }, { "mmsi", mmsi } };
-            string json = await getMethod("UnsubShipAlertOfSpeed", parameters);
-            return JsonSerializer.Deserialize<BaseResponse>(json, ResponseJsonOptions) ?? throw new InvalidOperationException("Deserialization returned null.");
-        }
-
-        /// <summary>独立航速提醒订阅服务。航速单位节，持续时间单位分钟。</summary>
-        public static async Task<SearchSubShipAlertOfSpeedResponse> SearchSubShipAlertOfSpeed(string key)
-        {
-            var parameters = new Dictionary<string, object> { { "key", key } };
-            string json = await getMethod("SearchSubShipAlertOfSpeed", parameters);
-            return JsonSerializer.Deserialize<SearchSubShipAlertOfSpeedResponse>(json, ResponseJsonOptions) ?? throw new InvalidOperationException("Deserialization returned null.");
-        }
-
-        /// <summary>返回原始瓦片字节。光栅图需配合海图JS及相应服务权限。</summary>
-        public static Task<byte[]> GetShipRasterImage(string key, int tile_type, int x, int y, int z) => client.GetByteArrayAsync(GetShipRasterImageUrl(key, tile_type, x, y, z));
-
-        /// <summary>仅构造地图图层URL，不发送请求。</summary>
-        public static string GetShipRasterImageUrl(string key, int tile_type, int x, int y, int z) => BuildImageUrl("GetShipRasterImage", new Dictionary<string, object> { { "key", key }, { "tile_type", tile_type }, { "x", x }, { "y", y }, { "z", z } });
-
-        /// <summary>返回原始瓦片字节。光栅图需配合海图JS及相应服务权限。</summary>
-        public static Task<byte[]> GetPortTile(string key, string projection_type, int x, int y, int z) => client.GetByteArrayAsync(GetPortTileUrl(key, projection_type, x, y, z));
-
-        /// <summary>仅构造地图图层URL，不发送请求。</summary>
-        public static string GetPortTileUrl(string key, string projection_type, int x, int y, int z) => BuildImageUrl("GetPortTile", new Dictionary<string, object> { { "key", key }, { "projection_type", projection_type }, { "x", x }, { "y", y }, { "z", z } });
-
-        private static string BuildImageUrl(string name, Dictionary<string, object> parameters)
-        {
-            return apiUrl + "/" + name + "?" + string.Join("&", parameters.Select(p =>
-                Uri.EscapeDataString(p.Key) + "=" + Uri.EscapeDataString(Convert.ToString(p.Value, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty)));
-        }
-
-        /// <summary>????????????</summary>
+        /// <summary>Compatibility overload for the original point-to-point signature.</summary>
         public static Task<PlanRouteByPointResponse> PlanRouteByPoint(string key, string start_point, string end_point, string? avoid = null, string? through = null)
             => PlanRouteByPoint(key, start_point, end_point, avoid, through, null);
 
-        /// <summary>?????????????</summary>
+        /// <summary>Compatibility overload for the original area query signature.</summary>
         public static Task<AreaShipResponse> GetAreaShip(string key, string region, int output = 1, int? scode = null)
             => GetAreaShip(key, region, output, scode, null);
 
-        /// <summary>????????????</summary>
+        /// <summary>Compatibility overload for the original berth query signature.</summary>
         public static Task<GetBerthShipsResponse> GetBerthShips(string key, string port_code, int? ship_type = null)
             => GetBerthShips(key, port_code, ship_type, null);
 
-        /// <summary>????????????</summary>
+        /// <summary>Compatibility overload for the original anchor query signature.</summary>
         public static Task<GetAnchorShipsResponse> GetAnchorShips(string key, string port_code, int? ship_type = null)
             => GetAnchorShips(key, port_code, ship_type, null);
 
